@@ -1,0 +1,65 @@
+import {
+  ArrowLeftRight,
+  Box,
+  Boxes,
+  Building2,
+  CalendarClock,
+  CircleDot,
+  Container,
+  Cylinder,
+  Factory,
+  FileCheck2,
+  Handshake,
+  Headset,
+  Layers,
+  MessagesSquare,
+  Network,
+  Package,
+  PaintBucket,
+  Pill,
+  Repeat,
+  ScanSearch,
+  Search,
+  Shirt,
+  Target,
+  Trees,
+  Truck,
+  Zap,
+  type LucideProps,
+} from "lucide-react";
+
+const icons = {
+  ArrowLeftRight,
+  Box,
+  Boxes,
+  Building2,
+  CalendarClock,
+  CircleDot,
+  Container,
+  Cylinder,
+  Factory,
+  FileCheck2,
+  Handshake,
+  Headset,
+  Layers,
+  MessagesSquare,
+  Network,
+  Package,
+  PaintBucket,
+  Pill,
+  Repeat,
+  ScanSearch,
+  Search,
+  Shirt,
+  Target,
+  Trees,
+  Truck,
+  Zap,
+};
+
+export type IconName = keyof typeof icons;
+
+export function Icon({ name, ...props }: { name: IconName } & LucideProps) {
+  const Component = icons[name];
+  return <Component strokeWidth={1.5} aria-hidden {...props} />;
+}
