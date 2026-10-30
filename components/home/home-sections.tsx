@@ -145,7 +145,10 @@ export function ProductsShowcase() {
             title="Industrial Chemicals & Chemical Raw Materials"
             lead="A focused portfolio of high-demand industrial chemicals. Grade, specification, packaging and minimum order quantity vary by product and supply requirement."
           />
-          <Reveal delay={0.2} className="shrink-0">
+          <Reveal delay={0.2} className="flex shrink-0 flex-wrap gap-3">
+            <Button href="/product-catalog" variant="soft" arrow={false}>
+              Catalogue · COA &amp; MSDS
+            </Button>
             <Button href="/products" variant="outline">
               View All Products
             </Button>

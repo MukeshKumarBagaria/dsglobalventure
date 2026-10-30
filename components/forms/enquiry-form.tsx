@@ -4,11 +4,18 @@ import { CircleAlert, CircleCheckBig, LoaderCircle, Mail, Send } from "lucide-re
 import { useEffect, useId, useRef, useState, useTransition, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { productOptions } from "@/content/products";
 import { submitEnquiry } from "@/lib/actions/enquiry";
 import { mailLink, whatsappLink } from "@/lib/site";
 import { cx as cn } from "@/lib/cx";
-import { enquiryLimits, enquirySummary, readEnquiry, validateEnquiry, type EnquiryErrors, type EnquiryValues } from "@/lib/validation";
+import {
+  enquiryLimits,
+  enquirySummary,
+  readEnquiry,
+  validateEnquiry,
+  type EnquiryErrors,
+  type EnquiryValues,
+  type ProductOption,
+} from "@/lib/validation";
 
 type Status = "idle" | "success" | "fallback";
 
@@ -48,6 +55,7 @@ function Field({
 }
 
 export function EnquiryForm({
+  options: productOptions,
   defaultProduct = "",
   lockProduct = false,
   readQuery = false,
@@ -62,6 +70,8 @@ export function EnquiryForm({
   defaultMessage?: string;
   submitLabel?: string;
   className?: string;
+  /** product list for the select (passed from the server to keep product data out of the bundle) */
+  options: ProductOption[];
 }) {
   const uid = useId();
   const formRef = useRef<HTMLFormElement>(null);
@@ -86,11 +96,11 @@ export function EnquiryForm({
     }
     const doc = params.get("doc");
     if (doc && !message.value) message.value = `Please share the ${doc} for the selected product.`;
-  }, [readQuery]);
+  }, [readQuery, productOptions]);
 
   function revalidate(name: keyof EnquiryValues) {
     if (!errors[name] || !formRef.current) return;
-    const next = validateEnquiry(readEnquiry(new FormData(formRef.current)));
+    const next = validateEnquiry(readEnquiry(new FormData(formRef.current)), productOptions);
     setErrors((prev) => ({ ...prev, [name]: next[name] }));
   }
 
@@ -100,7 +110,7 @@ export function EnquiryForm({
     const formData = new FormData(form);
     if (lockProduct) formData.set("product", defaultProduct);
     const values = readEnquiry(formData);
-    const found = validateEnquiry(values);
+    const found = validateEnquiry(values, productOptions);
     setErrors(found);
     if (Object.keys(found).length > 0) {
       const first = Object.keys(found)[0];
@@ -343,7 +353,7 @@ export function EnquiryForm({
                 </p>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Button
-                    href={whatsappLink(submitted ? enquirySummary(submitted) : undefined)}
+                    href={whatsappLink(submitted ? enquirySummary(submitted, productOptions) : undefined)}
                     variant="whatsapp"
                     arrow={false}
                     icon={<WhatsAppIcon className="size-4" />}
@@ -351,7 +361,7 @@ export function EnquiryForm({
                     Send via WhatsApp
                   </Button>
                   <Button
-                    href={mailLink("Website enquiry", submitted ? enquirySummary(submitted) : undefined)}
+                    href={mailLink("Website enquiry", submitted ? enquirySummary(submitted, productOptions) : undefined)}
                     variant="soft"
                     arrow={false}
                     icon={<Mail className="size-4" />}

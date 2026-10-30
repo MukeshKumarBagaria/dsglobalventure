@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { FloatingActions } from "@/components/layout/floating-actions";
+import { productNav } from "@/content/navigation";
 import { products } from "@/content/products";
 import { absoluteUrl, site } from "@/lib/site";
 import { jsonLd } from "@/lib/utils";
@@ -139,7 +140,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <Header />
+        <Header productNav={productNav} />
         <main id="main">{children}</main>
         <Footer />
         <FloatingActions />

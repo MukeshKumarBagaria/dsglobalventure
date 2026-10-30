@@ -1,24 +1,11 @@
 import { products } from "@/content/products";
+import type { ProductNavItem } from "@/content/main-nav";
 
-export type NavItem = { label: string; href: string };
+export { mainNav, legalNav, type NavItem, type ProductNavItem } from "@/content/main-nav";
 
-export const mainNav: (NavItem & { children?: boolean })[] = [
-  { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Products", href: "/products", children: true },
-  { label: "Industries", href: "/industries" },
-  { label: "Sourcing & Supply", href: "/sourcing-supply" },
-  { label: "Quality", href: "/quality" },
-  { label: "Contact", href: "/contact" },
-];
-
-export const productNav = [
+/** Built on the server and passed to client menus as a prop (keeps product data out of the client bundle). */
+export const productNav: ProductNavItem[] = [
   ...products.map((p) => ({ label: p.name, href: `/products/${p.slug}`, meta: `CAS ${p.cas}`, slug: p.slug })),
   { label: "Other Chemicals", href: "/products/other-chemicals", meta: "Send your requirement", slug: "other" },
-];
-
-export const legalNav: NavItem[] = [
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms & Conditions", href: "/terms-and-conditions" },
-  { label: "Disclaimer", href: "/disclaimer" },
+  { label: "Product Catalogue", href: "/product-catalog", meta: "COA & MSDS", slug: "catalog" },
 ];

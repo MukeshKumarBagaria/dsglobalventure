@@ -13,7 +13,8 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { Eyebrow, SectionHeading } from "@/components/ui/section-heading";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { getIndustry } from "@/content/industries";
-import { availableInformation, getProduct, productFaqs, products } from "@/content/products";
+import { getDocumentsFor } from "@/content/catalog";
+import { availableInformation, getProduct, productFaqs, productOptions, products } from "@/content/products";
 import { images } from "@/lib/images";
 import { absoluteUrl, site, telLink, whatsappLink } from "@/lib/site";
 import { jsonLd } from "@/lib/utils";
@@ -48,6 +49,9 @@ async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) 
   if (!product) notFound();
 
   const related = products.filter((p) => p.slug !== product.slug);
+  const docs = getDocumentsFor(product.slug);
+  const coa = docs.find((d) => d.type === "COA");
+  const msds = docs.find((d) => d.type === "MSDS");
   const facts: [string, string][] = [
     ["CAS No.", product.cas],
     ["Molecular formula", `${product.formulaDisplay} (${product.formula})`],
@@ -113,6 +117,11 @@ async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) 
         >
           WhatsApp Enquiry
         </Button>
+        {docs.length > 0 ? (
+          <Button href={`/product-catalog#doc=${(coa ?? docs[0]).id}`} variant="soft" arrow={false} icon={<FileText className="size-4" />}>
+            View COA &amp; MSDS
+          </Button>
+        ) : null}
       </PageHero>
 
       {/* Quick facts */}
@@ -230,11 +239,11 @@ async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) 
               </div>
               <p className="mt-5 leading-relaxed text-ink/85">{product.safety}</p>
               <Link
-                href={`/contact?product=${product.slug}&doc=SDS`}
+                href={msds ? `/product-catalog#doc=${msds.id}` : `/contact?product=${product.slug}&doc=SDS`}
                 className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-brand-700"
               >
                 <FileText className="size-4" aria-hidden />
-                Request SDS for {product.name}
+                {msds ? `View MSDS for ${product.name}` : `Request SDS for ${product.name}`}
               </Link>
             </div>
           </Reveal>
@@ -278,7 +287,7 @@ async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) 
           </div>
           <Reveal delay={0.1} className="lg:col-span-7">
             <div className="rounded-[2rem] bg-white p-6 shadow-[0_40px_80px_-35px_rgb(16_41_74/0.4)] sm:p-10">
-              <EnquiryForm defaultProduct={product.slug} lockProduct submitLabel="Request a Quote" />
+              <EnquiryForm defaultProduct={product.slug} lockProduct submitLabel="Request a Quote" options={productOptions} />
             </div>
           </Reveal>
         </div>

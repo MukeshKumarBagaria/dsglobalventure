@@ -28,14 +28,14 @@ export async function submitEnquiry(formData: FormData): Promise<EnquiryResult> 
   if (String(formData.get("website") ?? "").length > 0) return { ok: true };
 
   const values = readEnquiry(formData);
-  const errors = validateEnquiry(values);
+  const errors = validateEnquiry(values, productOptions);
   if (Object.keys(errors).length > 0) return { ok: false, reason: "invalid", errors };
 
   const apiKey = process.env.RESEND_API_KEY;
   const to = process.env.ENQUIRY_TO_EMAIL;
   const from = process.env.ENQUIRY_FROM_EMAIL ?? "DS Global Ventures Website <onboarding@resend.dev>";
 
-  const text = enquirySummary(values);
+  const text = enquirySummary(values, productOptions);
 
   if (!apiKey || !to) {
     if (process.env.NODE_ENV !== "production") {

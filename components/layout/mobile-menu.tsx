@@ -6,11 +6,21 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { Logo } from "@/components/layout/logo";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { mainNav, productNav } from "@/content/navigation";
+import { mainNav, type ProductNavItem } from "@/content/main-nav";
 import { site, telLink, whatsappLink } from "@/lib/site";
 import { cx as cn } from "@/lib/cx";
 
-export function MobileMenu({ open, onClose, pathname }: { open: boolean; onClose: () => void; pathname: string }) {
+export function MobileMenu({
+  open,
+  onClose,
+  pathname,
+  productNav,
+}: {
+  open: boolean;
+  onClose: () => void;
+  pathname: string;
+  productNav: ProductNavItem[];
+}) {
   const [productsOpen, setProductsOpen] = useState(false);
   useEffect(() => {
     if (!open) return;

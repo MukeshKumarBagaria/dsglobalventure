@@ -1,11 +1,18 @@
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight } from "lucide-react";
-import { FlaskConical } from "lucide-react";
-import { productNav } from "@/content/navigation";
+import { ArrowRight, ArrowUpRight, FileText, FlaskConical } from "lucide-react";
+import type { ProductNavItem } from "@/content/main-nav";
 import { cx as cn } from "@/lib/cx";
 
-export function MegaMenu({ open, onNavigate }: { open: boolean; onNavigate: () => void }) {
-  const items = productNav.filter((p) => p.slug !== "other");
+export function MegaMenu({
+  open,
+  items: productNav,
+  onNavigate,
+}: {
+  open: boolean;
+  items: ProductNavItem[];
+  onNavigate: () => void;
+}) {
+  const items = productNav.filter((p) => p.slug !== "other" && p.slug !== "catalog");
 
   return (
     <div
@@ -43,13 +50,21 @@ export function MegaMenu({ open, onNavigate }: { open: boolean; onNavigate: () =
           ))}
           <li>
             <Link
-              href="/products"
+              href="/product-catalog"
               tabIndex={open ? undefined : -1}
               onClick={onNavigate}
-              className="group flex h-full items-center justify-center gap-2 rounded-2xl border border-dashed border-line p-3 text-sm font-medium text-body transition-colors hover:border-brand-500 hover:text-brand-700"
+              className="group flex h-full items-center gap-3 rounded-2xl border border-dashed border-brand-300 bg-brand-50/70 p-3 transition-colors hover:border-brand-500 hover:bg-brandwash"
             >
-              View all products
-              <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" aria-hidden />
+              <span className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-white text-brand-600 shadow-(--shadow-card)">
+                <FileText className="size-5" strokeWidth={1.5} aria-hidden />
+              </span>
+              <span className="min-w-0">
+                <span className="flex items-center gap-1 font-display text-[0.92rem] font-semibold text-ink">
+                  Product Catalogue
+                  <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden />
+                </span>
+                <span className="mt-0.5 block font-mono text-[0.7rem] tracking-wide text-muted">COA &amp; MSDS documents</span>
+              </span>
             </Link>
           </li>
         </ul>

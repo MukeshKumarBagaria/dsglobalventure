@@ -417,6 +417,38 @@ Section order and copy pattern (example: Phenol):
 
 ---
 
+## 4A. PRODUCT CATALOGUE  (`/product-catalog`)
+
+**SEO** — Title: `Product Catalogue — COA & MSDS Documents | DS Global Ventures` · Description: `Browse specifications (COA) and material safety data sheets (MSDS) … View instantly or request a quotation.`
+
+- Breadcrumb: Home / Products / Product Catalogue
+- Eyebrow: `Product Catalogue` · H1: `Product Catalogue & Technical Documents`
+- Lead: `Specifications (COA) and Material Safety Data Sheets (MSDS) for our product range. Open any document instantly, download it, or request a quotation in one click.`
+- Stats: `13 Products · 18 Documents · 2 Doc types` · note `Documents open instantly in the built-in viewer — no download needed.`
+- Toolbar: search (`Search product, CAS no. or application`), category chips (Resin Raw Materials · Solvents & Alcohols · Monomers · Glycols · Organic Acids · Waxes), document filter (All · COA · MSDS), `Showing X of 13 products`, empty state `No products match your search`.
+- Product card: category · name · formula · MW · CAS chip · one-line summary · up to 3 key specs **taken from the product's own COA** · two document tiles (COA, MSDS) or `Available on request` tiles · `Request Quotation` · WhatsApp · `Product details` (core products).
+- Viewer: document title, COA/MSDS tabs, zoom, page counter, Download, Open in new tab, `Request Quotation`, Close. Deep links: `/product-catalog#doc=<product>-coa|msds`, `/product-catalog#quote=<product>`.
+- Quotation dialog: `Request a Quotation — <Product>` with the enquiry form (product pre-selected and locked).
+- Info section `What You’ll Find in Each Document`: Specification / COA · Material Safety Data Sheet · Batch documents on request.
+
+| Product | CAS | Documents |
+|---|---|---|
+| Phenol | 108-95-2 | COA (1 p) · MSDS (4 p) |
+| Methanol | 67-56-1 | COA (1 p) · MSDS (5 p) |
+| Mono Ethylene Glycol (MEG) | 107-21-1 | COA (1 p) · MSDS (5 p) |
+| Styrene Monomer | 100-42-5 | COA (1 p) · MSDS (5 p) |
+| Isopropanol (IPA) | 67-63-0 | COA (1 p) · MSDS (5 p) |
+| Acetic Acid (Glacial) | 64-19-7 | COA (1 p) · MSDS (5 p) |
+| Adipic Acid | 124-04-9 | MSDS (4 p) — COA on request |
+| Melamine | 108-78-1 | COA (1 p) · MSDS (4 p) |
+| Vinyl Acetate Monomer (VAM) | 108-05-4 | COA (1 p) — MSDS on request |
+| Paraffin Wax | 8002-74-2 | COA (1 p) · MSDS (4 p) |
+| Paraformaldehyde · Formaldehyde · Acetone | — | on request |
+
+> **Client action:** the MSDS PDFs still contain the placeholders `[Registered office address]`, `[Phone number]` and `[Email address]` in Section 1 — replace them in the source documents and re-export.
+
+---
+
 ## 5. INDUSTRIES  (`/industries`)
 
 **SEO** — Title: `Industries We Serve | DS Global Ventures` · Description: `Chemical raw materials for resins & adhesives, plywood & laminates, paints & coatings, chemical manufacturing, pharmaceuticals, rubber & plastics, construction chemicals and textiles.`

@@ -30,8 +30,8 @@ export default function ProductsPage() {
         lead="DS Global Ventures supplies and sources a range of industrial chemicals and chemical raw materials for customers across multiple industries."
       >
         <Button href="/contact">Request a Quote</Button>
-        <Button href="/products/other-chemicals" variant="glass">
-          Other Chemicals
+        <Button href="/product-catalog" variant="glass">
+          Catalogue · COA &amp; MSDS
         </Button>
       </PageHero>
 

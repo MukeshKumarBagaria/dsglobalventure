@@ -10,6 +10,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/products", priority: 0.9, changeFrequency: "monthly" },
     ...products.map((p) => ({ path: `/products/${p.slug}`, priority: 0.9, changeFrequency: "monthly" as const })),
     { path: "/products/other-chemicals", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/product-catalog", priority: 0.9, changeFrequency: "monthly" },
     { path: "/about", priority: 0.7, changeFrequency: "yearly" },
     { path: "/industries", priority: 0.8, changeFrequency: "monthly" },
     { path: "/sourcing-supply", priority: 0.8, changeFrequency: "monthly" },

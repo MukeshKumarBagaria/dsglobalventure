@@ -57,6 +57,7 @@ Out of scope (Phase 2): blog/insights, CMS, multilingual, customer portal, live 
 /products/methanol               Product detail (SSG)
 /products/acetone                Product detail (SSG)
 /products/other-chemicals        Other chemicals / requirement page
+/product-catalog                 Product catalogue: COA & MSDS documents, viewer, quotation
 /industries                      Industries (anchors: #resins-adhesives …)
 /sourcing-supply                 Sourcing & Supply
 /quality                         Quality & Documentation
@@ -409,3 +410,25 @@ Rules that keep it there:
 5. **`content-visibility: auto`** on every section except `[data-hero]`.
 6. CSS is inlined (`experimental.inlineCss`); fonts self-hosted and subset.
 7. Avoid position offsets based on a percentage of an element's height (layout shift) and avoid Suspense placeholders on fully static pages.
+
+
+---
+
+## PART H — PRODUCT CATALOGUE & PDF VIEWER (v1.3)
+
+**Goal:** one page with every product and its technical documents; any document opens instantly in-page; every product has a quotation action.
+
+| Concern | Decision |
+|---|---|
+| Rendering library | **react-pdf 11** (Mozilla **PDF.js 6**) — crisp canvas rendering + selectable text layer on every device, including mobile where native PDF embedding is unreliable. |
+| Speed | Viewer chunk + PDF.js are code-split and loaded **only on first open**. Hovering/focusing a document prefetches the viewer chunk, the worker and the PDF. Page 1 shows its pre-rendered preview image instantly while PDF.js renders. PDFs are small (71–251 KB). |
+| Worker | `scripts/copy-pdf-worker.mjs` copies the version-matched worker to `/public/pdfjs/pdf.worker.<version>.min.mjs` on install/dev/build (cached immutably). |
+| Compatibility | PDF.js 6 needs Chrome 125+ / Safari 18+. Older browsers (feature-detected) or any load error fall back to the browser's native PDF view plus **Open PDF** / **Download** buttons. |
+| No-JS | Document tiles are real links to the PDF; quotation buttons link to `/contact?product=…`. JavaScript upgrades them to the in-page viewer / dialog via event delegation (`data-doc-open`, `data-quote`). |
+| Page weight | Cards are server components; filtering toggles `hidden` on server-rendered cards (no hydration). Previews are lazy, optimised AVIF/WebP. Lighthouse: desktop 100, mobile ~90–95, A11y/BP/SEO 100. |
+| Dialogs | Native `<dialog>` (focus trap, Escape, top layer); page scroll locked while open; deep links `#doc=` / `#quote=`. |
+| Caching | `/documents/*` cached 1 day (+ SWR 7 days); `/pdfjs/*` immutable. |
+
+Files: `content/catalog.ts` (data) · `components/catalog/*` (card, toolbar, controller, pdf-viewer, quote-dialog, modal) · `app/product-catalog/page.tsx` · `public/documents/*.pdf` + `public/documents/previews/*.jpg`.
+
+Adding a document: drop the PDF into `public/documents/`, render its preview (`qlmanage -t -s 1224 -o <dir> file.pdf` → JPEG into `previews/`), add it to the product's `documents` in `content/catalog.ts` (pages, size).

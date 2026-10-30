@@ -1,5 +1,3 @@
-import { productOptions } from "@/content/products";
-
 export type EnquiryValues = {
   name: string;
   company: string;
@@ -11,6 +9,8 @@ export type EnquiryValues = {
   message: string;
   consent: boolean;
 };
+
+export type ProductOption = { value: string; label: string };
 
 export type EnquiryErrors = Partial<Record<keyof EnquiryValues, string>>;
 
@@ -42,7 +42,8 @@ export function readEnquiry(formData: FormData): EnquiryValues {
   };
 }
 
-export function validateEnquiry(v: EnquiryValues): EnquiryErrors {
+/** `options` = the allowed product list (passed in so this module stays free of product data). */
+export function validateEnquiry(v: EnquiryValues, options: readonly ProductOption[]): EnquiryErrors {
   const errors: EnquiryErrors = {};
   const tooLong = (key: keyof typeof enquiryLimits) => v[key].length > enquiryLimits[key];
 
@@ -52,7 +53,7 @@ export function validateEnquiry(v: EnquiryValues): EnquiryErrors {
   if (!PHONE_RE.test(v.phone) || digits.length < 7 || digits.length > 15)
     errors.phone = "Please enter a valid mobile number.";
   if (!EMAIL_RE.test(v.email) || tooLong("email")) errors.email = "Please enter a valid email address.";
-  if (!productOptions.some((p) => p.value === v.product)) errors.product = "Please select a product.";
+  if (!options.some((p) => p.value === v.product)) errors.product = "Please select a product.";
   if (tooLong("quantity")) errors.quantity = "Please keep the quantity short (e.g. 20 MT / month).";
   if (v.location.length < 2 || tooLong("location")) errors.location = "Please enter the delivery location.";
   if (tooLong("message")) errors.message = "Please keep the message under 2000 characters.";
@@ -62,8 +63,8 @@ export function validateEnquiry(v: EnquiryValues): EnquiryErrors {
 }
 
 /** Plain-text summary used for WhatsApp / email fallbacks and email bodies. */
-export function enquirySummary(v: EnquiryValues) {
-  const productLabel = productOptions.find((p) => p.value === v.product)?.label ?? v.product;
+export function enquirySummary(v: EnquiryValues, options: readonly ProductOption[] = []) {
+  const productLabel = options.find((p) => p.value === v.product)?.label ?? v.product;
   return [
     "New enquiry — DS Global Ventures website",
     "",

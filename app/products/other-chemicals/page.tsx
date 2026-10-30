@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { productOptions } from "@/content/products";
 import { Check, Info } from "lucide-react";
 import { EnquiryForm } from "@/components/forms/enquiry-form";
 import { Molecule } from "@/components/molecules/molecule";
@@ -105,7 +106,7 @@ export default function OtherChemicalsPage() {
           </div>
           <Reveal delay={0.1} className="lg:col-span-8">
             <div className="rounded-[2rem] border border-line bg-white p-6 shadow-(--shadow-card) sm:p-10">
-              <EnquiryForm defaultProduct="other" submitLabel="Send Your Requirement" />
+              <EnquiryForm defaultProduct="other" submitLabel="Send Your Requirement" options={productOptions} />
             </div>
           </Reveal>
         </div>

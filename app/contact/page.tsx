@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { productOptions } from "@/content/products";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { EnquiryForm } from "@/components/forms/enquiry-form";
 import { PageHero } from "@/components/sections/page-hero";
@@ -45,7 +46,7 @@ export default function ContactPage() {
               <p className="mt-3 mb-9 leading-relaxed">
                 Share the product, quantity and delivery location. Add grade, purity or packaging details if available.
               </p>
-              <EnquiryForm readQuery />
+              <EnquiryForm readQuery options={productOptions} />
             </div>
           </Reveal>
 

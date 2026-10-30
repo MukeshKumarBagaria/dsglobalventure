@@ -1,4 +1,5 @@
 import type { ImageKey } from "@/lib/images";
+import { catalog } from "@/content/catalog";
 
 export type ProductSlug = "phenol" | "paraformaldehyde" | "formaldehyde" | "methanol" | "acetone";
 
@@ -177,8 +178,12 @@ export const products: Product[] = [
   },
 ];
 
+/** Enquiry-form options: core products first, then the rest of the catalogue. */
 export const productOptions = [
   ...products.map((p) => ({ value: p.slug as string, label: p.name })),
+  ...catalog
+    .filter((c) => !products.some((p) => p.slug === c.slug))
+    .map((c) => ({ value: c.slug, label: c.label })),
   { value: "other", label: "Other Chemical" },
 ];
 

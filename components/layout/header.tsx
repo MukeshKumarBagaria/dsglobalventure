@@ -9,7 +9,7 @@ import { MegaMenu } from "@/components/layout/mega-menu";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { mainNav } from "@/content/navigation";
+import { mainNav, type ProductNavItem } from "@/content/main-nav";
 import { mailLink, site, telLink, whatsappLink } from "@/lib/site";
 import { useScrollY } from "@/lib/use-scroll-y";
 import { cx as cn } from "@/lib/cx";
@@ -18,7 +18,7 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Header() {
+export function Header({ productNav }: { productNav: ProductNavItem[] }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -144,7 +144,7 @@ export function Header() {
                           aria-hidden
                         />
                       </Link>
-                      <MegaMenu open={megaOpen} onNavigate={() => setMegaOpen(false)} />
+                      <MegaMenu open={megaOpen} items={productNav} onNavigate={() => setMegaOpen(false)} />
                     </li>
                   ) : (
                     <li key={item.href}>
@@ -184,7 +184,7 @@ export function Header() {
         </div>
       </header>
 
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} />
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} productNav={productNav} />
     </>
   );
 }

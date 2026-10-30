@@ -34,6 +34,13 @@ npm run lint
    [`app/icon.svg`](app/icon.svg) if a brand logo is supplied.
 5. Confirm the product list matches what is actually traded ([`content/products.ts`](content/products.ts)).
 
+## Product catalogue (COA & MSDS)
+
+`/product-catalog` lists every product with its documents and opens PDFs in an in-page viewer (react-pdf / PDF.js).
+To add or replace a document: put the PDF in `public/documents/`, generate a page-1 preview into
+`public/documents/previews/` (macOS: `qlmanage -t -s 1224 -o /tmp/out file.pdf`, then convert to JPEG), and update
+`content/catalog.ts`. The PDF.js worker is copied automatically by `scripts/copy-pdf-worker.mjs`.
+
 ## Project structure
 
 ```
