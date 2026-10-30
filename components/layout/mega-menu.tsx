@@ -63,7 +63,7 @@ export function MegaMenu({
                   Product Catalogue
                   <ArrowRight className="size-3.5 transition-transform group-hover:translate-x-1" aria-hidden />
                 </span>
-                <span className="mt-0.5 block font-mono text-[0.7rem] tracking-wide text-muted">COA &amp; MSDS documents</span>
+                <span className="mt-0.5 block font-mono text-[0.7rem] tracking-wide text-muted">Specification sheets (COA)</span>
               </span>
             </Link>
           </li>

@@ -10,16 +10,23 @@ import { absoluteUrl, site } from "@/lib/site";
 import { jsonLd } from "@/lib/utils";
 
 // Self-hosted variable fonts (latin subset) — no third-party font requests.
-const montserrat = localFont({
-  src: "./fonts/montserrat.woff2",
-  variable: "--font-montserrat",
-  weight: "100 900",
+const jakarta = localFont({
+  src: "./fonts/plus-jakarta-sans.woff2",
+  variable: "--font-jakarta",
+  weight: "200 800",
   display: "swap",
 });
 
-const inter = localFont({
-  src: "./fonts/inter.woff2",
-  variable: "--font-inter",
+const dmSans = localFont({
+  src: "./fonts/dm-sans.woff2",
+  variable: "--font-dm-sans",
+  weight: "100 1000",
+  display: "swap",
+});
+
+const geistMono = localFont({
+  src: "./fonts/geist-mono.woff2",
+  variable: "--font-geist-mono",
   weight: "100 900",
   display: "swap",
 });
@@ -130,7 +137,7 @@ document.addEventListener('pointermove',function(e){var t=e.target;var c=t&&t.cl
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${montserrat.variable} ${inter.variable} antialiased`}>
+    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${dmSans.variable} ${geistMono.variable} antialiased`}>
       <body className="min-h-dvh bg-white">
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationSchema)} />

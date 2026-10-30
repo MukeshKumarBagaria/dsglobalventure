@@ -147,7 +147,7 @@ export function ProductsShowcase() {
           />
           <Reveal delay={0.2} className="flex shrink-0 flex-wrap gap-3">
             <Button href="/product-catalog" variant="soft" arrow={false}>
-              Catalogue · COA &amp; MSDS
+              Catalogue · Spec Sheets
             </Button>
             <Button href="/products" variant="outline">
               View All Products

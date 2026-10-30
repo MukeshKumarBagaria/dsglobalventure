@@ -87,18 +87,15 @@ export function Header({ productNav }: { productNav: ProductNavItem[] }) {
                 {site.contact.email}
               </a>
             </div>
-            <div className="flex items-center gap-6">
-              <span className="font-mono text-[0.7rem] tracking-[0.14em] text-muted uppercase">Industrial Chemicals &amp; Raw Materials</span>
-              <a
-                href={whatsappLink()}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-brand-700"
-              >
-                <WhatsAppIcon className="size-3.5 text-whatsapp" />
-                WhatsApp
-              </a>
-            </div>
+            <a
+              href={whatsappLink()}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 transition-colors hover:text-brand-700"
+            >
+              <WhatsAppIcon className="size-3.5 text-whatsapp" />
+              WhatsApp
+            </a>
           </div>
         </div>
 

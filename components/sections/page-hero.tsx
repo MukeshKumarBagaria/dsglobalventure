@@ -1,5 +1,5 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Breadcrumb, type Crumb } from "@/components/ui/breadcrumb";
+import { BreadcrumbSchema, type Crumb } from "@/components/ui/breadcrumb";
 import { ParallaxImage } from "@/components/ui/parallax-image";
 import { Eyebrow } from "@/components/ui/section-heading";
 import type { SiteImage } from "@/lib/images";
@@ -53,10 +53,8 @@ export function PageHero({
         )}
       >
         <div className={cn(aside ? "lg:col-span-7" : "lg:col-span-8")}>
-          <div className="anim-rise" style={d(0)}>
-            <Breadcrumb items={crumbs} />
-          </div>
-          <div className="anim-rise mt-8" style={d(0.05)}>
+          <BreadcrumbSchema items={crumbs} />
+          <div className="anim-rise" style={d(0.05)}>
             <Eyebrow>{eyebrow}</Eyebrow>
           </div>
           <h1 className="mt-5 text-[clamp(2.25rem,5vw,4.25rem)] leading-[1.04] font-bold tracking-[-0.03em] text-ink">

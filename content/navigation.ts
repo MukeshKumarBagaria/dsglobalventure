@@ -7,5 +7,5 @@ export { mainNav, legalNav, type NavItem, type ProductNavItem } from "@/content/
 export const productNav: ProductNavItem[] = [
   ...products.map((p) => ({ label: p.name, href: `/products/${p.slug}`, meta: `CAS ${p.cas}`, slug: p.slug })),
   { label: "Other Chemicals", href: "/products/other-chemicals", meta: "Send your requirement", slug: "other" },
-  { label: "Product Catalogue", href: "/product-catalog", meta: "COA & MSDS", slug: "catalog" },
+  { label: "Product Catalogue", href: "/product-catalog", meta: "Spec sheets", slug: "catalog" },
 ];

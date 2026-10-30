@@ -22,9 +22,6 @@ function pdfJsSupported() {
 const PAGE_RATIO = 1224 / 945; // US Letter, matches the preview images
 const ZOOM_STEPS = [0.6, 0.8, 1, 1.25, 1.5, 1.75, 2];
 
-const typeBadge = (type: ViewerDoc["type"]) =>
-  type === "COA" ? "bg-brand-600 text-white" : "bg-amber-400 text-ink";
-
 function IconAction({
   label,
   onClick,
@@ -156,7 +153,7 @@ export default function PdfViewer({
         {/* Toolbar */}
         <header className="flex flex-wrap items-center gap-x-4 gap-y-3 border-b border-line bg-white/95 px-3 py-3 sm:px-6">
           <div className="flex min-w-0 flex-1 items-center gap-3">
-            <span className={cx("shrink-0 rounded-lg px-2.5 py-1 font-mono text-xs font-bold tracking-wider", typeBadge(doc.type))}>
+            <span className="shrink-0 rounded-lg bg-brand-600 px-2.5 py-1 font-mono text-xs font-bold tracking-wider text-white">
               {doc.type}
             </span>
             <div className="min-w-0">
@@ -183,7 +180,7 @@ export default function PdfViewer({
                     d.id === doc.id ? "bg-white text-brand-700 shadow-(--shadow-card)" : "text-body hover:text-ink",
                   )}
                 >
-                  {d.type === "COA" ? "Specification / COA" : "MSDS"}
+                  {d.label}
                 </button>
               ))}
             </div>

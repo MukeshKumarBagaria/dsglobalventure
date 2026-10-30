@@ -31,7 +31,7 @@ export default function ProductsPage() {
       >
         <Button href="/contact">Request a Quote</Button>
         <Button href="/product-catalog" variant="glass">
-          Catalogue · COA &amp; MSDS
+          Catalogue · Spec Sheets
         </Button>
       </PageHero>
 

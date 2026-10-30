@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { BreadcrumbSchema } from "@/components/ui/breadcrumb";
 import { Eyebrow } from "@/components/ui/section-heading";
 
 export function LegalPage({
@@ -18,10 +18,8 @@ export function LegalPage({
       <section data-hero="" className="surface-soft relative overflow-hidden">
         <div className="bg-grid-light absolute inset-0 opacity-70" aria-hidden />
         <div className="container-x relative pt-40 pb-16 lg:pt-48 lg:pb-20">
-          <Breadcrumb items={[{ label: title, href }]} />
-          <Eyebrow className="mt-8">
-            Legal
-          </Eyebrow>
+          <BreadcrumbSchema items={[{ label: title, href }]} />
+          <Eyebrow>Legal</Eyebrow>
           <h1 className="mt-5 text-[clamp(2.25rem,5vw,3.75rem)] font-bold tracking-tight text-ink">{title}</h1>
           <p className="mt-4 font-mono text-xs tracking-[0.14em] text-muted uppercase">Last updated: {updated}</p>
         </div>
