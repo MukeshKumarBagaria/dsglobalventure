@@ -32,6 +32,9 @@
   --color-brandwash: #e8f1fe;
   --color-amber-400: #f5a524;
   --color-whatsapp: #25d366;
+  /* price moves in the header ticker (AA on the mist utility bar) */
+  --color-up: #0a7b45;
+  --color-down: #c2312a;
 
   --font-display: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
@@ -148,6 +151,13 @@
 
 @utility text-gradient-ink {
   background-image: linear-gradient(120deg, var(--color-brand-700) 0%, var(--color-brand-500) 55%, var(--color-brand-600) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-gradient-hero {
+  background-image: linear-gradient(100deg, #5aa6ff 0%, #a9d4ff 48%, #6fb2ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -331,15 +341,96 @@ main ~ footer {
   to { color: var(--to); }
 }
 
-/* Process timeline — line fills and steps light up */
-.process-track { view-timeline-name: --process; }
-.process-fill-x, .process-fill-y { transform: none; }
-@keyframes fill-x { from { transform: scaleX(0); } to { transform: scaleX(1); } }
-@keyframes fill-y { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-@keyframes node-on {
-  from { background-color: #ffffff; border-color: var(--color-line); color: var(--color-body); box-shadow: 0 0 0 0 rgb(47 125 237 / 0); }
-  to { background-color: var(--color-brand-600); border-color: var(--color-brand-600); color: #ffffff; box-shadow: 0 0 0 6px rgb(47 125 237 / 0.15); }
+/* Home trust cards — photo URLs arrive as --photo-sm / --photo-lg from trust-section.tsx. A photo is requested
+   only once its card scrolls into view (the boot script adds .is-in), or straight away without JavaScript. */
+:root:not(.js) .trust-photo,
+.is-in .trust-photo { background: var(--photo-sm) center / cover no-repeat; }
+@media (min-width: 640px), (min-resolution: 1.5dppx) {
+  :root:not(.js) .trust-photo,
+  .is-in .trust-photo { background-image: var(--photo-lg); }
 }
+
+/* Insight rows — the article photo sits behind a row on hover, on large hover-capable screens only, and is fetched
+   only once the row has been revealed (rows elsewhere stay text-only; see insights-list.tsx) */
+.insight-photo { background: center / cover no-repeat; }
+@media (hover: hover) and (min-width: 64rem) {
+  :root:not(.js) .insight-photo,
+  .is-in .insight-photo { background-image: var(--photo-sm); }
+}
+@media (hover: hover) and (min-width: 64rem) and (min-resolution: 1.5dppx) {
+  :root:not(.js) .insight-photo,
+  .is-in .insight-photo { background-image: var(--photo-lg); }
+}
+
+/* Blog article typography (components/blog/article-body.tsx) */
+.prose-article { color: var(--color-body); font-size: 1.0625rem; line-height: 1.8; }
+.prose-article > * + * { margin-top: 1.25rem; }
+.prose-article h2 {
+  margin-top: 3rem;
+  font-size: clamp(1.4rem, 2.2vw, 1.75rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.prose-article h3 { margin-top: 2rem; font-size: 1.2rem; line-height: 1.3; font-weight: 700; color: var(--color-ink); }
+.prose-article :is(h2, h3) + * { margin-top: 0.75rem; }
+.prose-article strong { font-weight: 600; color: var(--color-ink); }
+.prose-article a {
+  font-weight: 500;
+  color: var(--color-brand-700);
+  text-decoration: underline;
+  text-decoration-color: rgb(30 99 214 / 0.35);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+.prose-article a:hover { text-decoration-color: currentColor; }
+.prose-article :is(ul, ol) { padding-left: 1.4rem; }
+.prose-article ul { list-style: disc; }
+.prose-article ol { list-style: decimal; }
+.prose-article li + li { margin-top: 0.6rem; }
+.prose-article li::marker { font-weight: 600; color: var(--color-brand-500); }
+.prose-table { margin-top: 1.75rem; overflow-x: auto; border: 1px solid var(--color-line); border-radius: 1rem; }
+.prose-table table { width: 100%; min-width: 34rem; border-collapse: collapse; font-size: 0.95rem; line-height: 1.55; }
+.prose-table :is(th, td) { padding: 0.85rem 1rem; text-align: left; vertical-align: top; border-top: 1px solid var(--color-line); }
+.prose-table thead th {
+  border-top: 0;
+  background: var(--color-mist);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+.prose-table tbody th { font-weight: 600; color: var(--color-ink); }
+
+/* Process timeline — the line fills as you scroll, a glowing head rides its tip and each step lights up as the
+   line reaches it. Base styles are the finished state (reduced motion, no JS); every animation starts from "off".
+   On phones the timeline's scrollport is inset to a single line 62% down the screen, so "cover" runs from the
+   track's top crossing that line to its bottom crossing it and the vertical fill's tip sits exactly on the line.
+   The desktop track is short (~220px), so there the port is the 35%–78% band: the fill then spans ~40% of a
+   screen of scrolling instead of a flick. */
+.process-track { view-timeline-name: --process; view-timeline-inset: 62% 38%; }
+@media (width >= 64rem) { .process-track { view-timeline-inset: 35% 22%; } }
+.process-head-x, .process-head-y { opacity: 0; }
+.process-head-x::after,
+.process-head-y::after {
+  content: "";
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px var(--color-brand-500), 0 0 18px 5px rgb(47 125 237 / 0.55);
+}
+.process-head-x::after { top: 50%; right: -6px; margin-top: -6px; }
+.process-head-y::after { bottom: -6px; left: 50%; margin-left: -6px; }
+@keyframes fill-x { from { transform: scaleX(0); } }
+@keyframes fill-y { from { transform: scaleY(0); } }
+@keyframes head-x { 0% { transform: translateX(-100%); opacity: 0; } 4%, 96% { opacity: 1; } 100% { transform: none; opacity: 0; } }
+@keyframes head-y { 0% { transform: translateY(-100%); opacity: 0; } 3%, 97% { opacity: 1; } 100% { transform: none; opacity: 0; } }
+@keyframes node-on { from { background-color: #ffffff; border-color: var(--color-line); color: var(--color-body); box-shadow: 0 0 0 0 rgb(47 125 237 / 0); } }
+@keyframes copy-on { from { opacity: 0.4; } }
 
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
@@ -349,9 +440,39 @@ main ~ footer {
       animation-timeline: --quote;
       animation-range: cover calc(18% + var(--i) * 1.6%) cover calc(22% + var(--i) * 1.6%);
     }
-    .process-fill-x { animation: fill-x linear both; animation-timeline: --process; animation-range: cover 20% cover 60%; }
-    .process-fill-y { animation: fill-y linear both; animation-timeline: --process; animation-range: cover 10% cover 70%; }
-    .process-node { animation: node-on linear both; animation-timeline: view(); animation-range: cover 38% cover 44%; }
+    /* phones/tablets: vertical line; each step lights as it crosses the same 62% line the fill's tip is on */
+    .process-fill-y, .process-head-y { animation: fill-y linear both; animation-timeline: --process; animation-range: cover 0% cover 100%; }
+    .process-head-y { animation-name: head-y; }
+    .process-node, .process-copy {
+      animation: node-on linear both;
+      animation-timeline: view(block 62% 38%);
+      animation-range: cover 35% cover 65%;
+    }
+    .process-copy { animation-name: copy-on; }
+    /* desktop: horizontal line over the first 60% of the track crossing; step i is lit at i/4 of the line */
+    @media (width >= 64rem) {
+      .process-fill-x, .process-head-x { animation: fill-x linear both; animation-timeline: --process; animation-range: cover 0% cover 60%; }
+      .process-head-x { animation-name: head-x; }
+      .process-node, .process-copy {
+        animation-timeline: --process;
+        animation-range: cover calc(var(--i) * 15%) cover calc(var(--i) * 15% + 4%);
+      }
+    }
+  }
+}
+
+/* Browsers without scroll-driven animations: play the same sequence once, when the boot script marks it in view */
+@supports not (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .js .process-fill-x, .js .process-fill-y { transition: transform 1.8s var(--ease-in-out-quint) 0.2s; }
+    .js .process-track:not(.is-in) .process-fill-x { transform: scaleX(0); }
+    .js .process-track:not(.is-in) .process-fill-y { transform: scaleY(0); }
+    .js .process-node, .js .process-copy {
+      transition: background-color 0.4s, border-color 0.4s, color 0.4s, box-shadow 0.4s, opacity 0.6s;
+      transition-delay: calc(0.2s + var(--i) * 0.4s);
+    }
+    .js .process-track:not(.is-in) .process-node { background-color: #ffffff; border-color: var(--color-line); color: var(--color-body); box-shadow: none; }
+    .js .process-track:not(.is-in) .process-copy { opacity: 0.4; }
   }
 }
 
@@ -362,6 +483,93 @@ main ~ footer {
     stroke-dashoffset: 0 !important;
     transition: none !important;
   }
+}
+
+/* ------------------------------------------------------------------
+   Home hero — animated trade map, headline swoosh
+------------------------------------------------------------------- */
+/* Looping motion is transform/opacity on HTML elements only, so it runs on the compositor
+   (SVG and stroke-dashoffset animations would repaint on the main thread every frame). */
+@keyframes draw-in { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes ping {
+  0% { transform: scale(1); opacity: 0.9; }
+  75%, 100% { transform: scale(3.6); opacity: 0; }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.95; }
+}
+
+.hero-swoosh { stroke-dasharray: 1; animation: draw-in 1.3s var(--ease-in-out-quint) 0.75s both; }
+
+.map-reveal { animation: fade-in 1.4s ease 0.3s both; }
+.map-twinkle,
+.map-ping,
+.map-comet { position: absolute; display: block; border-radius: 999px; }
+.map-twinkle {
+  width: 4px;
+  height: 4px;
+  margin: -2px 0 0 -2px;
+  background: #ffffff;
+  box-shadow: 0 0 6px 1px rgb(156 200 255 / 0.8);
+  opacity: 0;
+  animation: twinkle 5.5s ease-in-out var(--d) infinite both;
+}
+.map-ping {
+  width: 7px;
+  height: 7px;
+  margin: -3.5px 0 0 -3.5px;
+  border: 1px solid #9cc8ff;
+  animation: ping 3s var(--ease-out-expo) infinite both;
+  animation-delay: calc(1.4s + var(--i, 0) * 0.45s);
+}
+.map-ping-hub { width: 10px; height: 10px; margin: -5px 0 0 -5px; border-color: #ffffff; animation-delay: 0.8s; }
+.map-ping-late { animation-delay: 2.3s; }
+/* comet: a short glowing streak whose head (18px in) sits on the lane; keyframes come from world-map.tsx */
+.map-comet {
+  left: 0;
+  top: 0;
+  width: 22px;
+  height: 3px;
+  margin: -1.5px 0 0 -18px;
+  transform-origin: 18px 1.5px;
+  background: linear-gradient(90deg, rgb(140 196 255 / 0), rgb(255 255 255 / 0.95) 80%);
+  box-shadow: 0 0 10px 1px rgb(140 196 255 / 0.5);
+  opacity: 0;
+  animation-duration: 4.6s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-delay: calc(2.2s + var(--i) * 0.7s);
+}
+/* rings radiating from the hub: drawn at full size and scaled up from a dot, so they stay crisp */
+@keyframes map-ring {
+  0% { transform: scale(0.06); opacity: 0; }
+  12% { opacity: 0.9; }
+  100% { transform: scale(1); opacity: 0; }
+}
+.map-ring {
+  position: absolute;
+  width: 46cqw;
+  height: 46cqw;
+  margin: -23cqw 0 0 -23cqw;
+  border: 1px solid rgb(156 200 255 / 0.5);
+  border-radius: 999px;
+  background: radial-gradient(closest-side, transparent 62%, rgb(91 155 245 / 0.14));
+  opacity: 0;
+  animation: map-ring 6s cubic-bezier(0.25, 0.6, 0.4, 1) infinite both;
+  animation-delay: calc(1s + var(--i) * 2s);
+}
+/* floating formula tags: `translate` places them, the looping `transform` only bobs */
+@keyframes bob { 0%, 100% { transform: none; } 50% { transform: translateY(-8px); } }
+.map-tag {
+  position: absolute;
+  translate: -50% -50%;
+  animation: fade-in 0.9s ease both, bob 7s ease-in-out infinite;
+  animation-delay: calc(1.6s + var(--i) * 0.18s), calc(var(--i) * -1.3s);
+}
+@media (prefers-reduced-motion: reduce) {
+  .map-comet, .map-ring, .map-ping, .map-twinkle, .map-tag { animation: none; }
 }
 
 /* Catalogue dialogs (native <dialog>) */

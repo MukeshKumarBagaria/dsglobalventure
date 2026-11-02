@@ -14,13 +14,13 @@ export const site = {
   locale: "en_IN",
 
   contact: {
-    /** PLACEHOLDER — display format */
-    phoneDisplay: "+91 XXXXX XXXXX",
-    /** PLACEHOLDER — E.164 digits used for tel: links */
-    phoneE164: "+910000000000",
-    /** PLACEHOLDER — digits only, country code first, used for wa.me links */
-    whatsapp: "910000000000",
-    whatsappDisplay: "+91 XXXXX XXXXX",
+    /** display format */
+    phoneDisplay: "+91 98933 53200",
+    /** E.164 digits used for tel: links */
+    phoneE164: "+919893353200",
+    /** digits only, country code first, used for wa.me links */
+    whatsapp: "919893353200",
+    whatsappDisplay: "+91 98933 53200",
     /** PLACEHOLDER */
     email: "info@dsglobalventures.com",
     /** PLACEHOLDER */

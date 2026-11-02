@@ -9,6 +9,7 @@ export const mainNav: (NavItem & { children?: boolean })[] = [
   { label: "Industries", href: "/industries" },
   { label: "Sourcing & Supply", href: "/sourcing-supply" },
   { label: "Quality", href: "/quality" },
+  { label: "Blog", href: "/blog" },
   { label: "Contact", href: "/contact" },
 ];
 

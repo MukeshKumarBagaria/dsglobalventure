@@ -11,6 +11,9 @@ export const buttonVariants = cva(
       variant: {
         primary:
           "bg-gradient-to-r from-brand-600 to-brand-700 text-white shadow-[0_12px_30px_-12px_rgb(30_99_214/0.75)] hover:from-brand-500 hover:to-brand-600 hover:shadow-[0_16px_40px_-12px_rgb(30_99_214/0.85)]",
+        bright:
+          "bg-gradient-to-r from-[#2471e6] to-brand-600 text-white shadow-[0_16px_40px_-12px_rgb(47_125_237/0.95),inset_0_1px_0_rgb(255_255_255/0.25)] hover:from-brand-600 hover:to-brand-700 hover:shadow-[0_20px_48px_-12px_rgb(91_155_245/0.95),inset_0_1px_0_rgb(255_255_255/0.25)]",
+        outlineLight: "border-[1.5px] border-white/75 bg-white/[0.04] text-white hover:border-white hover:bg-white/12",
         soft: "bg-brandwash text-brand-700 hover:bg-brand-200/60",
         outline: "border border-ink/15 bg-white text-ink hover:border-brand-500 hover:text-brand-700",
         glass:
@@ -23,6 +26,7 @@ export const buttonVariants = cva(
         sm: "h-9 px-4 text-sm",
         md: "h-11 px-6 text-[0.9375rem]",
         lg: "h-13 px-7 text-base",
+        xl: "h-14 px-9 text-[1.0625rem]",
       },
     },
     defaultVariants: { variant: "primary", size: "md" },

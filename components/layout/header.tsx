@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Clock, Mail, Menu, Phone } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import { Logo } from "@/components/layout/logo";
 import { MegaMenu } from "@/components/layout/mega-menu";
 import { MobileMenu } from "@/components/layout/mobile-menu";
@@ -18,7 +18,7 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Header({ productNav }: { productNav: ProductNavItem[] }) {
+export function Header({ productNav, ticker }: { productNav: ProductNavItem[]; ticker?: ReactNode }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -72,7 +72,7 @@ export function Header({ productNav }: { productNav: ProductNavItem[] }) {
             scrolled ? "max-h-0 opacity-0" : "max-h-10 opacity-100",
           )}
         >
-          <div className="container-wide flex h-9 items-center justify-between text-[0.78rem] text-body">
+          <div className="container-wide flex h-9 items-center justify-between text-[0.78rem] whitespace-nowrap text-body">
             <div className="flex items-center gap-6">
               <span className="flex items-center gap-2">
                 <Clock className="size-3.5 text-brand-600" aria-hidden />
@@ -82,20 +82,24 @@ export function Header({ productNav }: { productNav: ProductNavItem[] }) {
                 <Phone className="size-3.5 text-brand-600" aria-hidden />
                 {site.contact.phoneDisplay}
               </a>
-              <a href={mailLink()} className="flex items-center gap-2 transition-colors hover:text-brand-700">
+              {/* below xl the crude ticker needs the room */}
+              <a href={mailLink()} className="hidden items-center gap-2 transition-colors hover:text-brand-700 xl:flex">
                 <Mail className="size-3.5 text-brand-600" aria-hidden />
                 {site.contact.email}
               </a>
             </div>
-            <a
-              href={whatsappLink()}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 transition-colors hover:text-brand-700"
-            >
-              <WhatsAppIcon className="size-3.5 text-whatsapp" />
-              WhatsApp
-            </a>
+            <div className="flex items-center gap-5">
+              {ticker}
+              <a
+                href={whatsappLink()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 transition-colors hover:text-brand-700"
+              >
+                <WhatsAppIcon className="size-3.5 text-whatsapp" />
+                WhatsApp
+              </a>
+            </div>
           </div>
         </div>
 
@@ -105,12 +109,13 @@ export function Header({ productNav }: { productNav: ProductNavItem[] }) {
             "border-b transition-[background-color,border-color,backdrop-filter] duration-500",
             scrolled || megaOpen
               ? "border-line bg-white/85 shadow-[0_10px_30px_-20px_rgb(16_41_74/0.35)] backdrop-blur-xl"
-              : "border-transparent bg-white/55 backdrop-blur-md",
+              : "border-line/70 bg-white/95 backdrop-blur-md",
           )}
         >
           <div className="container-wide flex h-[72px] items-center justify-between gap-6">
             <Logo />
 
+            {/* eight links: tighter padding until 2xl so labels never wrap at 1280px */}
             <nav aria-label="Main" className="hidden xl:block">
               <ul className="flex items-center gap-1">
                 {mainNav.map((item) =>
@@ -131,7 +136,7 @@ export function Header({ productNav }: { productNav: ProductNavItem[] }) {
                         aria-expanded={megaOpen}
                         aria-haspopup="true"
                         className={cn(
-                          "flex items-center gap-1.5 rounded-full px-3.5 py-2 text-[0.875rem] font-medium transition-colors",
+                          "flex items-center gap-1.5 rounded-full px-2.5 py-2 text-[0.875rem] font-medium whitespace-nowrap transition-colors 2xl:px-3.5",
                           isActive(pathname, item.href) ? "text-brand-700" : "text-ink/75 hover:text-ink",
                         )}
                       >
@@ -148,13 +153,13 @@ export function Header({ productNav }: { productNav: ProductNavItem[] }) {
                       <Link
                         href={item.href}
                         className={cn(
-                          "relative rounded-full px-3.5 py-2 text-[0.875rem] font-medium transition-colors",
+                          "relative rounded-full px-2.5 py-2 text-[0.875rem] font-medium whitespace-nowrap transition-colors 2xl:px-3.5",
                           isActive(pathname, item.href) ? "text-brand-700" : "text-ink/75 hover:text-ink",
                         )}
                       >
                         {item.label}
                         {isActive(pathname, item.href) ? (
-                          <span aria-hidden className="absolute -bottom-0.5 left-1/2 size-1 -translate-x-1/2 rounded-full bg-brand-500" />
+                          <span aria-hidden className="absolute inset-x-2.5 -bottom-1.5 h-0.5 rounded-full bg-brand-600 2xl:inset-x-3.5" />
                         ) : null}
                       </Link>
                     </li>

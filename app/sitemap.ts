@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { posts } from "@/content/blog";
 import { products } from "@/content/products";
 import { absoluteUrl } from "@/lib/site";
 
@@ -16,9 +17,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/sourcing-supply", priority: 0.8, changeFrequency: "monthly" },
     { path: "/quality", priority: 0.7, changeFrequency: "yearly" },
     { path: "/contact", priority: 0.8, changeFrequency: "yearly" },
+    { path: "/blog", priority: 0.7, changeFrequency: "monthly" },
     { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },
     { path: "/terms-and-conditions", priority: 0.2, changeFrequency: "yearly" },
     { path: "/disclaimer", priority: 0.2, changeFrequency: "yearly" },
   ];
-  return pages.map((p) => ({ url: absoluteUrl(p.path), lastModified, changeFrequency: p.changeFrequency, priority: p.priority }));
+  return [
+    ...pages.map((p) => ({ url: absoluteUrl(p.path), lastModified, changeFrequency: p.changeFrequency, priority: p.priority })),
+    ...posts.map((p) => ({
+      url: absoluteUrl(`/blog/${p.slug}`),
+      lastModified: new Date(p.published),
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
+    })),
+  ];
 }

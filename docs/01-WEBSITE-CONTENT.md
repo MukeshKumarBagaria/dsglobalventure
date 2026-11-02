@@ -445,7 +445,7 @@ Section order and copy pattern (example: Phenol):
 | Paraffin Wax | 8002-74-2 | COA (1 p) · MSDS (4 p) |
 | Paraformaldehyde · Formaldehyde · Acetone | — | on request |
 
-> **Client action:** the MSDS PDFs still contain the placeholders `[Registered office address]`, `[Phone number]` and `[Email address]` in Section 1 — replace them in the source documents and re-export.
+> **Client action:** the MSDS PDFs still contain the placeholders `[Registered office address]` and `[Email address]` in Section 1 — replace them in the source documents and re-export. (The phone line now reads +91 98933 53200; it was patched into the published PDFs, so update the source documents too.)
 
 ---
 

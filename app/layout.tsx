@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Suspense } from "react";
 import "./globals.css";
+import { CrudeTicker } from "@/components/layout/crude-ticker";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { FloatingActions } from "@/components/layout/floating-actions";
@@ -147,7 +149,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           Skip to content
         </a>
-        <Header productNav={productNav} />
+        <Header
+          productNav={productNav}
+          ticker={
+            <Suspense fallback={null}>
+              <CrudeTicker />
+            </Suspense>
+          }
+        />
         <main id="main">{children}</main>
         <Footer />
         <FloatingActions />
