@@ -32,12 +32,12 @@ export function LogoMark({ className }: { className?: string }) {
 
 export function Logo({ tone = "light", className }: { tone?: "dark" | "light"; className?: string }) {
   return (
-    <Link href="/" className={cn("group flex items-center gap-3", className)}>
-      <LogoMark className="transition-transform duration-700 ease-(--ease-out-expo) group-hover:rotate-[60deg]" />
+    <Link href="/" className={cn("group flex min-w-0 items-center gap-2.5 sm:gap-3", className)}>
+      <LogoMark className="size-9 shrink-0 sm:size-10 transition-transform duration-700 ease-(--ease-out-expo) group-hover:rotate-[60deg]" />
       <span className="flex flex-col leading-none">
         <span
           className={cn(
-            "font-display text-[0.98rem] font-bold tracking-[0.06em] whitespace-nowrap",
+            "font-display text-[0.88rem] font-bold tracking-[0.04em] whitespace-nowrap min-[400px]:text-[0.98rem] min-[400px]:tracking-[0.06em]",
             tone === "dark" ? "text-white" : "text-ink",
           )}
         >
@@ -45,7 +45,7 @@ export function Logo({ tone = "light", className }: { tone?: "dark" | "light"; c
         </span>
         <span
           className={cn(
-            "mt-1 text-[0.62rem] font-medium tracking-[0.22em] whitespace-nowrap uppercase",
+            "mt-1 text-[0.56rem] font-medium tracking-[0.14em] whitespace-nowrap uppercase min-[400px]:text-[0.62rem] min-[400px]:tracking-[0.22em]",
             tone === "dark" ? "text-brand-300/90" : "text-brand-600",
           )}
         >
