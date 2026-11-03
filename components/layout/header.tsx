@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ChevronDown, Clock, Mail, Menu, Phone } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
+import { BusinessesMenu } from "@/components/layout/businesses-menu";
 import { Logo } from "@/components/layout/logo";
 import { MegaMenu } from "@/components/layout/mega-menu";
 import { MobileMenu } from "@/components/layout/mobile-menu";
@@ -115,11 +116,13 @@ export function Header({ productNav, ticker }: { productNav: ProductNavItem[]; t
           <div className="container-wide flex h-[72px] items-center justify-between gap-6">
             <Logo />
 
-            {/* eight links: tighter padding until 2xl so labels never wrap at 1280px */}
+            {/* tighter padding until 2xl so labels never wrap at 1280px */}
             <nav aria-label="Main" className="hidden xl:block">
               <ul className="flex items-center gap-1">
                 {mainNav.map((item) =>
-                  item.children ? (
+                  item.children === "businesses" ? (
+                    <BusinessesMenu key={item.href} label={item.label} href={item.href} active={isActive(pathname, item.href)} />
+                  ) : item.children === "products" ? (
                     <li
                       key={item.href}
                       ref={productsRef}
@@ -149,7 +152,8 @@ export function Header({ productNav, ticker }: { productNav: ProductNavItem[]; t
                       <MegaMenu open={megaOpen} items={productNav} onNavigate={() => setMegaOpen(false)} />
                     </li>
                   ) : (
-                    <li key={item.href}>
+                    // Home is hidden until 2xl (the logo links home) so nine items fit at 1280px
+                    <li key={item.href} className={cn(item.href === "/" && "hidden 2xl:block")}>
                       <Link
                         href={item.href}
                         className={cn(

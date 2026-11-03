@@ -1,12 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import { Suspense } from "react";
 import "./globals.css";
-import { CrudeTicker } from "@/components/layout/crude-ticker";
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
-import { FloatingActions } from "@/components/layout/floating-actions";
-import { productNav } from "@/content/navigation";
 import { products } from "@/content/products";
 import { absoluteUrl, site } from "@/lib/site";
 import { jsonLd } from "@/lib/utils";
@@ -143,23 +137,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-dvh bg-white">
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationSchema)} />
-        <a
-          href="#main"
-          className="fixed top-3 left-3 z-[100] -translate-y-20 rounded-full bg-brand-600 px-5 py-2.5 text-sm font-semibold text-white transition-transform focus:translate-y-0"
-        >
-          Skip to content
-        </a>
-        <Header
-          productNav={productNav}
-          ticker={
-            <Suspense fallback={null}>
-              <CrudeTicker />
-            </Suspense>
-          }
-        />
-        <main id="main">{children}</main>
-        <Footer />
-        <FloatingActions />
+        {/* site chrome lives in each route group's layout: (site) for DS Global, its own for /ds-construction */}
+        {children}
       </body>
     </html>
   );

@@ -6,7 +6,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { Logo } from "@/components/layout/logo";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { mainNav, type ProductNavItem } from "@/content/main-nav";
+import { businessNav, mainNav, type ProductNavItem } from "@/content/main-nav";
 import { site, telLink, whatsappLink } from "@/lib/site";
 import { cx as cn } from "@/lib/cx";
 
@@ -22,6 +22,7 @@ export function MobileMenu({
   productNav: ProductNavItem[];
 }) {
   const [productsOpen, setProductsOpen] = useState(false);
+  const [businessesOpen, setBusinessesOpen] = useState(false);
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -80,35 +81,49 @@ export function MobileMenu({
                           </Link>
                           <button
                             type="button"
-                            onClick={() => setProductsOpen((v) => !v)}
-                            aria-expanded={productsOpen}
-                            aria-label="Toggle products"
+                            onClick={() =>
+                              item.children === "products" ? setProductsOpen((v) => !v) : setBusinessesOpen((v) => !v)
+                            }
+                            aria-expanded={item.children === "products" ? productsOpen : businessesOpen}
+                            aria-label={`Toggle ${item.label.toLowerCase()}`}
                             className="flex size-10 items-center justify-center rounded-full border border-line bg-white text-ink"
                           >
-                            <ChevronDown className={cn("size-4 transition-transform", productsOpen && "rotate-180")} aria-hidden />
+                            <ChevronDown
+                              className={cn(
+                                "size-4 transition-transform",
+                                (item.children === "products" ? productsOpen : businessesOpen) && "rotate-180",
+                              )}
+                              aria-hidden
+                            />
                           </button>
                         </div>
-                        <div
-                          className={cn(
-                            "grid transition-[grid-template-rows] duration-400 ease-(--ease-out-expo)",
-                            productsOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
-                          )}
-                        >
-                            <ul className="overflow-hidden" inert={!productsOpen}>
-                              {productNav.map((p) => (
-                                <li key={p.href}>
-                                  <Link
-                                    href={p.href}
-                                    className="flex items-center justify-between py-2.5 pl-4 text-body hover:text-brand-700"
-                                  >
-                                    <span>{p.label}</span>
-                                    <span className="font-mono text-[0.68rem] text-muted">{p.meta}</span>
-                                  </Link>
-                                </li>
-                              ))}
-                              <li className="h-3" />
-                            </ul>
-                        </div>
+                        {(() => {
+                          const isOpen = item.children === "products" ? productsOpen : businessesOpen;
+                          const links = item.children === "products" ? productNav : businessNav;
+                          return (
+                            <div
+                              className={cn(
+                                "grid transition-[grid-template-rows] duration-400 ease-(--ease-out-expo)",
+                                isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+                              )}
+                            >
+                              <ul className="overflow-hidden" inert={!isOpen}>
+                                {links.map((p) => (
+                                  <li key={p.href}>
+                                    <Link
+                                      href={p.href}
+                                      className="flex items-center justify-between gap-4 py-2.5 pl-4 text-body hover:text-brand-700"
+                                    >
+                                      <span>{p.label}</span>
+                                      <span className="text-right font-mono text-[0.68rem] text-muted">{p.meta}</span>
+                                    </Link>
+                                  </li>
+                                ))}
+                                <li className="h-3" />
+                              </ul>
+                            </div>
+                          );
+                        })()}
                       </>
                     ) : (
                       <Link

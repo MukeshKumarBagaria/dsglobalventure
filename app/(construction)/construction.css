@@ -1,0 +1,409 @@
+/* ==========================================================================
+   DS Construction (/ds-construction) — "limestone & brass": ivory stone, deep bronze, champagne brass.
+   Imported by the (construction) layout only, so none of this ships on DS Global Ventures pages.
+   Looping motion is transform/opacity only (compositor); everything stops for reduced motion.
+   ========================================================================== */
+
+.dsc {
+  --dsc-ivory: #f3eee5;
+  --dsc-paper: #fbf8f2;
+  --dsc-stone: #e7dece;
+  --dsc-line: #d9cdb9;
+  --dsc-ink: #1f1a15;
+  --dsc-body: #574e43;
+  --dsc-muted: #6e6357;
+  /* brass for small text on ivory (AA); --dsc-gold / champagne for large type, rules and dark grounds */
+  --dsc-brass: #7d5c2e;
+  --dsc-gold: #b08d57;
+  --dsc-champagne: #d9bf8a;
+  --dsc-bronze: #33291f;
+  --dsc-bronze-2: #44372a;
+  --dsc-serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --dsc-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 100dvh;
+  background: var(--dsc-ivory);
+  color: var(--dsc-body);
+}
+.dsc ::selection { background: var(--dsc-champagne); color: var(--dsc-ink); }
+
+.dsc-serif { font-family: var(--dsc-serif); font-weight: 500; letter-spacing: -0.01em; color: var(--dsc-ink); }
+.dsc-gold-text {
+  background: linear-gradient(100deg, #7a5a2c 0%, #a07c45 45%, #b8935a 55%, #7a5a2c 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.dsc-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--dsc-brass);
+}
+.dsc-eyebrow::before { content: ""; width: 2.25rem; height: 1px; background: currentColor; }
+.dsc-dark .dsc-eyebrow { color: var(--dsc-champagne); }
+.dsc-h2 { font-family: var(--dsc-serif); font-weight: 500; font-size: clamp(2.4rem, 4.6vw, 4.2rem); line-height: 1.02; letter-spacing: -0.015em; color: var(--dsc-ink); }
+.dsc-dark .dsc-h2 { color: #f6f0e4; }
+.dsc-lead { font-size: 1.125rem; line-height: 1.75; }
+.dsc-section { padding-block: clamp(5.5rem, 11vw, 9.5rem); }
+
+/* --------------------------------------------------------------- Buttons */
+.dsc-btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  height: 3.4rem;
+  padding-inline: 1.9rem;
+  overflow: hidden;
+  border-radius: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.4s, background-color 0.4s, border-color 0.4s;
+}
+.dsc-btn svg { width: 1rem; height: 1rem; transition: transform 0.4s var(--dsc-ease); }
+.dsc-btn:hover svg { transform: translateX(4px); }
+.dsc-btn-solid { background: linear-gradient(135deg, #3a2f25, #5a4733); color: #f1e2bf; box-shadow: inset 0 0 0 1px rgb(217 191 138 / 0.45), 0 18px 40px -20px rgb(51 41 31 / 0.9); }
+/* brass sheen sweeps across on hover (transform only) */
+.dsc-btn-solid::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent 30%, rgb(241 226 191 / 0.28) 50%, transparent 70%);
+  transform: translateX(-110%);
+  transition: transform 0.9s var(--dsc-ease);
+}
+.dsc-btn-solid:hover::after { transform: translateX(110%); }
+.dsc-btn-line { border: 1px solid rgb(125 92 46 / 0.55); color: var(--dsc-ink); }
+.dsc-btn-line:hover { background: var(--dsc-bronze); border-color: var(--dsc-bronze); color: #f1e2bf; }
+.dsc-dark .dsc-btn-line { border-color: rgb(217 191 138 / 0.5); color: #f1e2bf; }
+.dsc-dark .dsc-btn-line:hover { background: var(--dsc-champagne); color: var(--dsc-ink); }
+.dsc-btn:focus-visible, .dsc-link:focus-visible { outline: 2px solid var(--dsc-gold); outline-offset: 3px; }
+
+/* --------------------------------------------------------------- Header */
+.dsc-nav {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 50;
+  border-bottom: 1px solid rgb(125 92 46 / 0.14);
+  background: rgb(243 238 229 / 0.97);
+}
+/* frosted glass on large screens only — on phones the blur is costly to paint and barely visible */
+@media (width >= 64rem) {
+  .dsc-nav { background: rgb(243 238 229 / 0.82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+}
+.dsc-mark {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border: 1px solid var(--dsc-gold);
+  font-family: var(--dsc-serif);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--dsc-brass);
+  background: linear-gradient(135deg, rgb(255 255 255 / 0.6), rgb(217 191 138 / 0.18));
+}
+.dsc-link { position: relative; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: rgb(31 26 21 / 0.72); transition: color 0.3s; }
+.dsc-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.45rem;
+  height: 1px;
+  background: var(--dsc-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.5s var(--dsc-ease);
+}
+.dsc-link:hover { color: var(--dsc-ink); }
+.dsc-link:hover::after { transform: scaleX(1); transform-origin: left; }
+.dsc-sub { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; white-space: nowrap; color: var(--dsc-muted); }
+.dsc-burger { border: 1px solid rgb(125 92 46 / 0.4); color: var(--dsc-ink); }
+.dsc-menu-link { display: block; padding-block: 0.95rem; border-bottom: 1px solid var(--dsc-line); font-family: var(--dsc-serif); font-size: 1.6rem; color: var(--dsc-ink); }
+.dsc-menu-link:hover { color: var(--dsc-brass); }
+/* phones: native <details> disclosure (closed again from construction-header.tsx when a link is chosen) */
+.dsc-menu > summary { list-style: none; cursor: pointer; }
+.dsc-menu > summary::-webkit-details-marker { display: none; }
+.dsc-menu-panel { position: absolute; inset-inline: 0; top: 100%; border-bottom: 1px solid rgb(125 92 46 / 0.18); background: var(--dsc-paper); box-shadow: 0 30px 50px -30px rgb(51 41 31 / 0.5); }
+.dsc-menu[open] .dsc-burger-open { display: none; }
+.dsc-menu:not([open]) .dsc-burger-close { display: none; }
+
+/* --------------------------------------------------------------- Hero */
+.dsc-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: 6.5rem;
+  background: radial-gradient(56rem 38rem at 80% 46%, rgb(217 191 138 / 0.32), transparent 70%), var(--dsc-ivory);
+}
+@media (width >= 64rem) { .dsc-hero { min-height: max(100svh, 780px); } }
+/* blueprint grid */
+.dsc-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image: linear-gradient(rgb(125 92 46 / 0.08) 1px, transparent 1px), linear-gradient(90deg, rgb(125 92 46 / 0.08) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.6;
+}
+/* the radial fade is a full-hero mask layer — worth it on desktop, cheaper to skip on phones */
+@media (width >= 64rem) {
+  .dsc-hero::before { opacity: 1; mask-image: radial-gradient(ellipse at 70% 45%, #000 15%, transparent 72%); }
+}
+.dsc-hero h1 { font-family: var(--dsc-serif); font-weight: 500; font-size: clamp(3.1rem, 7.2vw, 6.6rem); line-height: 0.96; letter-spacing: -0.02em; color: var(--dsc-ink); }
+.dsc-pillars { display: grid; gap: 1.25rem; border-top: 1px solid var(--dsc-line); padding-top: 1.75rem; }
+@media (width >= 40rem) { .dsc-pillars { grid-template-columns: repeat(3, 1fr); } }
+.dsc-pillars dt { font-family: var(--dsc-serif); font-size: 1.05rem; font-style: italic; color: var(--dsc-brass); }
+.dsc-pillars dd { margin-top: 0.2rem; font-size: 0.86rem; font-weight: 600; letter-spacing: 0.04em; color: var(--dsc-ink); }
+.dsc-scroll-cue { width: 1px; height: 3.5rem; background: linear-gradient(var(--dsc-gold), transparent); transform-origin: top; animation: dsc-cue 2.4s var(--dsc-ease) infinite; }
+@keyframes dsc-cue { 0% { transform: scaleY(0); } 60% { transform: scaleY(1); opacity: 1; } 100% { transform: scaleY(1); opacity: 0; } }
+
+/* --------------------------------------------------------------- 3D tower (components/construction/tower-3d.tsx) */
+/* content-visibility: on phones the scene starts below the first screen, so its 3D layers aren't set up during load */
+.dsc-scene {
+  position: relative;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 41em;
+  height: 41em;
+  font-size: clamp(6.6px, 0.84vw, 12px);
+  perspective: 150em;
+  perspective-origin: 50% 22%;
+}
+.dsc-glow { position: absolute; left: 50%; top: 40%; width: 42em; height: 42em; margin: -21em 0 0 -21em; border-radius: 50%; background: radial-gradient(closest-side, rgb(217 191 138 / 0.55), transparent); }
+.dsc-tilt, .dsc-world, .dsc-box, .dsc-crane, .dsc-jib { transform-style: preserve-3d; }
+.dsc-tilt { position: absolute; inset: 0; }
+.dsc-world {
+  position: absolute;
+  left: 50%;
+  bottom: 4.5em;
+  transform: rotateX(-14deg) rotateY(-32deg);
+  animation: dsc-spin 52s linear infinite;
+}
+/* content-visibility clips to the box, so on phones the scene runs edge to edge (the swinging jib meets the screen
+   edge, not an invisible line); on desktop the scene is on screen at load, so skipping buys nothing — turn it off */
+.dsc-scene { margin-inline: -1rem; }
+@media (width >= 40rem) { .dsc-scene { margin-inline: -1.5rem; } }
+@media (width >= 64rem) { .dsc-scene { height: 46em; margin-inline: 0; content-visibility: visible; } }
+@keyframes dsc-spin {
+  from { transform: rotateX(-14deg) rotateY(-32deg); }
+  to { transform: rotateX(-14deg) rotateY(328deg); }
+}
+.dsc-ground {
+  position: absolute;
+  left: -24em;
+  top: -24em;
+  width: 48em;
+  height: 48em;
+  border-radius: 50%;
+  transform: rotateX(90deg);
+  background:
+    radial-gradient(closest-side, rgb(51 41 31 / 0.3), rgb(51 41 31 / 0.08) 42%, transparent 70%),
+    radial-gradient(circle, rgb(125 92 46 / 0.55) 0 0.07em, transparent 0.09em) 0 0 / 2em 2em;
+  mask-image: radial-gradient(closest-side, #000 50%, transparent);
+}
+.dsc-box {
+  position: absolute;
+  left: 0;
+  top: 0;
+  transform: translate3d(0, calc(var(--y) * -1em), 0);
+  animation: dsc-drop 1.15s cubic-bezier(0.2, 0.85, 0.25, 1) both;
+  animation-delay: calc(0.35s + var(--i) * 0.1s);
+}
+.js .dsc-scene:not(.is-in) :is(.dsc-box, .dsc-mast, .dsc-jib, .dsc-jib > i) { animation-play-state: paused; }
+/* floors drop into place bottom-up, like a building going up */
+@keyframes dsc-drop { from { transform: translate3d(0, calc((var(--y) + 20) * -1em), 0); } }
+.dsc-face {
+  position: absolute;
+  display: block;
+  left: calc(var(--w) * -0.5em);
+  top: calc(var(--h) * -1em);
+  width: calc(var(--w) * 1em);
+  height: calc(var(--h) * 1em);
+  backface-visibility: hidden;
+}
+.dsc-front { transform: translateZ(calc(var(--d) * 0.5em)); }
+.dsc-back { transform: rotateY(180deg) translateZ(calc(var(--d) * 0.5em)); }
+.dsc-side { left: calc(var(--d) * -0.5em); width: calc(var(--d) * 1em); }
+.dsc-right { transform: rotateY(90deg) translateZ(calc(var(--w) * 0.5em)); }
+.dsc-left { transform: rotateY(-90deg) translateZ(calc(var(--w) * 0.5em)); }
+.dsc-top { top: calc((var(--h) + var(--d) * 0.5) * -1em); height: calc(var(--d) * 1em); transform: rotateX(90deg); }
+
+/* bronze glass with brass mullions and a champagne slab edge */
+/* each glass box is two storeys: a slab line on top and one at mid-height */
+.dsc-box-glass .dsc-face {
+  border-top: 0.16em solid #d9bf8a;
+  background:
+    linear-gradient(180deg, transparent calc(50% - 0.06em), rgb(217 191 138 / 0.75) calc(50% - 0.06em) calc(50% + 0.06em), transparent calc(50% + 0.06em)),
+    linear-gradient(180deg, rgb(255 240 210 / 0.18), rgb(255 240 210 / 0) 46%),
+    repeating-linear-gradient(90deg, rgb(217 191 138 / 0.62) 0 0.1em, transparent 0.1em 1.5em),
+    linear-gradient(180deg, #514232, #2c241c);
+}
+.dsc-box-glass .dsc-side {
+  background:
+    linear-gradient(180deg, transparent calc(50% - 0.06em), rgb(217 191 138 / 0.6) calc(50% - 0.06em) calc(50% + 0.06em), transparent calc(50% + 0.06em)),
+    linear-gradient(rgb(18 12 6 / 0.3), rgb(18 12 6 / 0.3)),
+    repeating-linear-gradient(90deg, rgb(217 191 138 / 0.5) 0 0.1em, transparent 0.1em 1.5em),
+    linear-gradient(180deg, #4a3c2e, #2a2219);
+}
+/* a few warmly lit floors */
+.dsc-box-glass:nth-child(3n + 4) .dsc-front {
+  background:
+    linear-gradient(180deg, transparent calc(50% - 0.06em), rgb(217 191 138 / 0.75) calc(50% - 0.06em) calc(50% + 0.06em), transparent calc(50% + 0.06em)),
+    repeating-linear-gradient(90deg, rgb(217 191 138 / 0.7) 0 0.1em, transparent 0.1em 1.5em),
+    linear-gradient(180deg, rgb(255 214 150 / 0.55), rgb(255 214 150 / 0.12) 70%),
+    linear-gradient(180deg, #5a4733, #2f261d);
+}
+.dsc-box-podium .dsc-face { border-top: 0.12em solid #b08d57; background: linear-gradient(180deg, #f1e9da, #d6c9b3); }
+.dsc-box-podium .dsc-side { background: linear-gradient(180deg, #e0d4c0, #c4b59c); }
+.dsc-box-podium .dsc-top { border: 0; background: #ebe2d1; box-shadow: inset 0 0 0 0.9em #e3d8c5, inset 0 0 0 1em #b08d57; }
+.dsc-box-crown .dsc-face { border-top: 0.22em solid #f1e2bf; background: repeating-linear-gradient(90deg, #e3cb98 0 0.42em, #a9854f 0.42em 0.84em); }
+.dsc-box-crown .dsc-side { background: repeating-linear-gradient(90deg, #cdb07a 0 0.42em, #8f6e3d 0.42em 0.84em); }
+.dsc-box-crown .dsc-top { border: 0; background: #3a2f25; box-shadow: inset 0 0 0 0.25em #d9bf8a; }
+
+/* tower crane: lattice mast and a slowly swinging jib */
+.dsc-crane { position: absolute; left: 0; top: 0; transform: translate3d(13.5em, 0, -7.5em); }
+.dsc-mast {
+  position: absolute;
+  display: block;
+  left: -0.6em;
+  top: -40em;
+  width: 1.2em;
+  height: 40em;
+  border-inline: 0.12em solid #8a6634;
+  background:
+    repeating-linear-gradient(45deg, transparent 0 0.55em, #b08d57 0.55em 0.66em),
+    repeating-linear-gradient(-45deg, transparent 0 0.55em, #b08d57 0.55em 0.66em);
+  animation: fade-in 0.8s ease 1.7s both;
+}
+.dsc-mast-side { transform: rotateY(90deg); }
+.dsc-jib { position: absolute; left: 0; top: -40em; animation: dsc-swing 18s ease-in-out 2.4s infinite alternate both; }
+@keyframes dsc-swing {
+  from { transform: rotateY(15deg); }
+  to { transform: rotateY(-75deg); }
+}
+.dsc-jib > i { position: absolute; display: block; animation: fade-in 0.8s ease 2s both; }
+.dsc-jib-arm {
+  left: -6em;
+  top: -1em;
+  width: 27em;
+  height: 1em;
+  border-block: 0.12em solid #8a6634;
+  background: repeating-linear-gradient(60deg, transparent 0 0.6em, #b08d57 0.6em 0.72em);
+}
+.dsc-jib-arm-side { transform: rotateX(90deg); }
+.dsc-cable { left: 19.5em; top: 0; width: 0.08em; height: 6em; background: #7d5c2e; }
+.dsc-load { left: 18.6em; top: 6em; width: 1.9em; height: 1.3em; background: linear-gradient(180deg, #d9bf8a, #a9854f); }
+
+/* --------------------------------------------------------------- Statement */
+.dsc-statement p { font-family: var(--dsc-serif); font-weight: 500; font-size: clamp(1.9rem, 3.8vw, 3.4rem); line-height: 1.18; letter-spacing: -0.01em; color: var(--dsc-ink); }
+.dsc-statement em { font-style: italic; color: var(--dsc-brass); }
+
+/* --------------------------------------------------------------- Dark band (sectors, contact, footer) */
+.dsc-dark {
+  position: relative;
+  isolation: isolate;
+  background: radial-gradient(60rem 30rem at 15% 0%, rgb(217 191 138 / 0.12), transparent 70%), var(--dsc-bronze);
+  color: rgb(243 238 229 / 0.74);
+}
+.dsc-sector {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: clamp(1.75rem, 3vw, 2.5rem);
+  border: 1px solid rgb(217 191 138 / 0.2);
+  background: linear-gradient(180deg, rgb(255 255 255 / 0.045), rgb(255 255 255 / 0.01));
+  transition: transform 0.7s var(--dsc-ease), border-color 0.5s, background-color 0.5s;
+}
+.dsc-sector:hover { transform: perspective(900px) rotateX(3deg) translateY(-6px); border-color: rgb(217 191 138 / 0.45); }
+.dsc .glow-card::before { background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 0%), rgb(217 191 138 / 0.9), transparent 45%); }
+.dsc-numeral { font-family: var(--dsc-serif); font-size: 3.4rem; line-height: 1; font-style: italic; color: rgb(217 191 138 / 0.4); }
+.dsc-sector h3 { font-family: var(--dsc-serif); font-size: 2rem; font-weight: 500; line-height: 1.1; color: #f6f0e4; }
+.dsc-sector li { display: flex; gap: 0.75rem; padding-block: 0.65rem; border-top: 1px solid rgb(217 191 138 / 0.14); font-size: 0.9rem; color: rgb(243 238 229 / 0.82); }
+.dsc-sector li::before { content: ""; flex: none; width: 0.4rem; height: 0.4rem; margin-top: 0.5rem; transform: rotate(45deg); background: var(--dsc-champagne); }
+
+/* --------------------------------------------------------------- Expertise */
+.dsc-skill { position: relative; padding-block: 2rem; border-top: 1px solid var(--dsc-line); }
+.dsc-skill::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -1px;
+  height: 1px;
+  background: var(--dsc-gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s var(--dsc-ease);
+}
+.dsc-skill:hover::before { transform: scaleX(1); }
+.dsc-skill h3 { font-family: var(--dsc-serif); font-size: 1.85rem; font-weight: 500; line-height: 1.1; color: var(--dsc-ink); }
+.dsc-skill .dsc-index { font-family: var(--dsc-serif); font-style: italic; font-size: 1.1rem; color: var(--dsc-brass); }
+
+/* --------------------------------------------------------------- Approach */
+.dsc-approach { background: var(--dsc-paper); }
+.dsc-steps { position: relative; display: grid; gap: 2.5rem; }
+@media (width >= 64rem) { .dsc-steps { grid-template-columns: repeat(5, 1fr); gap: 2rem; } }
+.dsc-steps-line { display: none; }
+@media (width >= 64rem) {
+  .dsc-steps-line { display: block; position: absolute; left: 0; right: 0; top: 1.75rem; height: 1px; background: var(--dsc-line); }
+  .dsc-steps-line::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, var(--dsc-gold), var(--dsc-champagne)); transform-origin: left; }
+}
+.dsc-step-mark {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: 1px solid var(--dsc-gold);
+  border-radius: 50%;
+  background: var(--dsc-paper);
+  font-family: var(--dsc-serif);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--dsc-brass);
+}
+.dsc-step h3 { font-family: var(--dsc-serif); font-size: 1.55rem; font-weight: 500; line-height: 1.15; color: var(--dsc-ink); }
+
+/* --------------------------------------------------------------- Standards */
+.dsc-standard { padding: 2rem; border-top: 2px solid var(--dsc-gold); background: var(--dsc-paper); box-shadow: 0 30px 60px -45px rgb(51 41 31 / 0.55); transition: transform 0.6s var(--dsc-ease); }
+.dsc-standard:hover { transform: translateY(-4px); }
+.dsc-standard h3 { font-family: var(--dsc-serif); font-size: 1.6rem; font-weight: 500; line-height: 1.12; color: var(--dsc-ink); }
+
+/* --------------------------------------------------------------- Photo band */
+.dsc-band blockquote p { font-family: var(--dsc-serif); font-weight: 500; font-size: clamp(2rem, 4.4vw, 3.8rem); line-height: 1.1; color: #f8f2e6; }
+
+/* --------------------------------------------------------------- Contact */
+.dsc-contact-link { display: flex; align-items: center; gap: 1.25rem; padding-block: 1.4rem; border-top: 1px solid rgb(217 191 138 / 0.18); transition: color 0.3s; }
+.dsc-contact-link:hover { color: #f1e2bf; }
+.dsc-contact-link .dsc-contact-icon { display: grid; place-items: center; width: 3rem; height: 3rem; flex: none; border: 1px solid rgb(217 191 138 / 0.4); color: var(--dsc-champagne); transition: background-color 0.3s, color 0.3s; }
+.dsc-contact-link:hover .dsc-contact-icon { background: var(--dsc-champagne); color: var(--dsc-ink); }
+.dsc-contact-value { font-family: var(--dsc-serif); font-size: clamp(1.45rem, 2.4vw, 2rem); font-variant-numeric: lining-nums; color: #f6f0e4; }
+.dsc-brief { border: 1px solid rgb(217 191 138 / 0.25); background: rgb(255 255 255 / 0.04); padding: clamp(1.75rem, 3vw, 2.5rem); }
+
+/* --------------------------------------------------------------- Scroll-linked extras (progressive) */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    /* the whole scene tips back and settles as the hero scrolls away */
+    .dsc-tilt { animation: dsc-tilt linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+    .dsc-steps { view-timeline-name: --dsc-steps; }
+    .dsc-steps-line::after { animation: grow-x linear both; animation-timeline: --dsc-steps; animation-range: cover 15% cover 55%; }
+  }
+}
+@keyframes dsc-tilt { to { transform: translateY(5em) rotateX(10deg) scale(0.9); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .dsc-world, .dsc-box, .dsc-mast, .dsc-jib, .dsc-jib > i, .dsc-scroll-cue { animation: none !important; }
+}

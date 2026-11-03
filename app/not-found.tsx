@@ -1,10 +1,12 @@
 import { Img as Image } from "@/components/ui/img";
 import { Molecule } from "@/components/molecules/molecule";
+import { SiteChrome } from "@/components/layout/site-chrome";
 import { Button } from "@/components/ui/button";
 import { images } from "@/lib/images";
 
 export default function NotFound() {
   return (
+    <SiteChrome>
     <section data-hero="" className="relative isolate flex min-h-svh items-center overflow-hidden surface-soft">
       <Image
         src={images.complex.src}
@@ -38,5 +40,6 @@ export default function NotFound() {
         </div>
       </div>
     </section>
+    </SiteChrome>
   );
 }

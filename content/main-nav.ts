@@ -2,14 +2,22 @@
 export type NavItem = { label: string; href: string };
 export type ProductNavItem = NavItem & { meta: string; slug: string };
 
-export const mainNav: (NavItem & { children?: boolean })[] = [
+export type BusinessNavItem = NavItem & { meta: string };
+
+/** Sister businesses in the DS Global Ventures group — the "Our Businesses" menu */
+export const businessNav: BusinessNavItem[] = [
+  { label: "DS Construction", href: "/ds-construction", meta: "Premium & government construction" },
+];
+
+export const mainNav: (NavItem & { children?: "products" | "businesses" })[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
-  { label: "Products", href: "/products", children: true },
+  { label: "Products", href: "/products", children: "products" },
   { label: "Industries", href: "/industries" },
   { label: "Sourcing & Supply", href: "/sourcing-supply" },
   { label: "Quality", href: "/quality" },
   { label: "Blog", href: "/blog" },
+  { label: "Our Businesses", href: "/ds-construction", children: "businesses" },
   { label: "Contact", href: "/contact" },
 ];
 
