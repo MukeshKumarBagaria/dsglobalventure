@@ -122,7 +122,7 @@ app/
   about/ products/ products/[slug]/ products/other-chemicals/
   industries/ sourcing-supply/ quality/ contact/
   privacy-policy/ terms-and-conditions/ disclaimer/
-  not-found.tsx  sitemap.ts  robots.ts  manifest.ts  opengraph-image.tsx  icon.svg
+  not-found.tsx  sitemap.ts  robots.ts  manifest.ts  opengraph-image.tsx  favicon.ico  icon.png  apple-icon.png
 components/
   layout/   header, mega-menu, mobile-menu, top-bar, footer, floating-actions, scroll-progress
   sections/ home + shared page sections (hero, process, cta, faq, …)
@@ -234,7 +234,7 @@ Surfaces: `surface-soft` (white → soft-blue gradient with light glows), `surfa
 
 ### C0. Global chrome
 - **Top bar** (D only, 36 px, mist/90 frosted, body text, teal icons): hours · phone · email | descriptor · WhatsApp. Collapses when the header becomes sticky.
-- **Header** (72 px): frosted white/55 over the light heroes → on scroll > 24 px becomes `white/85` with `backdrop-blur-xl`, soft shadow and `line` border; ink nav text, teal-700 active. Logo left (DS monogram tile + wordmark), nav centre, “Request a Quote” right. Hides on scroll down after 400 px, reappears on scroll up (motion).
+- **Header** (72 px): frosted white/55 over the light heroes → on scroll > 24 px becomes `white/85` with `backdrop-blur-xl`, soft shadow and `line` border; ink nav text, teal-700 active. Logo left (client lockup: hexagon DS mark + wordmark + tagline, `assets/images/logo.png`), nav centre, “Request a Quote” right. Hides on scroll down after 400 px, reappears on scroll up (motion).
 - **Mega-menu** (Products): 2-column panel 760 px wide — left grid of 5 products (molecule mini-icon, name, CAS mono), right feature card (Other Chemicals). Opens on hover/focus with fade + 8 px rise, 180 ms; closes on Escape/blur.
 - **Mobile menu**: full-screen light `surface-soft` overlay, links stagger in (60 ms), products accordion, bottom actions. Body scroll locked, Lenis stopped.
 - **Scroll progress**: 2 px teal gradient bar at the very top.
@@ -349,7 +349,7 @@ Motion should feel **engineered and calm**: short distances (8–24 px), expo-ou
 1. `npm run build` → verify all routes static.
 2. Deploy to Vercel; set `NEXT_PUBLIC_SITE_URL`.
 3. Provision email: `vercel link` → `vercel integration discover --category messaging` → `vercel integration add <provider>` → `vercel env pull`. Set `ENQUIRY_TO_EMAIL` (inbox receiving leads) and `ENQUIRY_FROM_EMAIL` (verified sender domain).
-4. Replace placeholders in `lib/site.ts`; replace logo mark if a brand logo is provided.
+4. Replace placeholders in `lib/site.ts`; the brand logo and icons are in place (see README).
 5. Submit sitemap in Google Search Console; verify rich results.
 
 ### F1. Image credits (Unsplash Licence)

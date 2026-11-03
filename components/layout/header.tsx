@@ -114,7 +114,7 @@ export function Header({ productNav, ticker }: { productNav: ProductNavItem[]; t
           )}
         >
           <div className="container-wide flex h-[72px] items-center justify-between gap-6">
-            <Logo />
+            <Logo eager />
 
             {/* tighter padding until 2xl so labels never wrap at 1280px */}
             <nav aria-label="Main" className="hidden xl:block">

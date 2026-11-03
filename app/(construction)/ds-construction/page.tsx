@@ -1,15 +1,25 @@
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, ArrowUpRight, Mail, Phone } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Award, BadgeCheck, HardHat, Layers, Mail, Phone, ShieldCheck } from "lucide-react";
 import { ConstructionHeader } from "@/components/construction/construction-header";
 import { SectorIcon } from "@/components/construction/sector-icon";
-import { Tower3D } from "@/components/construction/tower-3d";
+import { Img } from "@/components/ui/img";
 import { ParallaxImage } from "@/components/ui/parallax-image";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { SplitWords } from "@/components/ui/split-words";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { approach, construction, constructionNav, enquiryChecklist, expertise, sectors, standards } from "@/content/construction";
+import {
+  approach,
+  construction,
+  constructionNav,
+  enquiryChecklist,
+  expertise,
+  highlights,
+  sectors,
+  standards,
+  type HighlightIcon,
+} from "@/content/construction";
 import { legalNav } from "@/content/main-nav";
 import { images } from "@/lib/images";
 import { absoluteUrl, mailLink, site, telLink, whatsappLink } from "@/lib/site";
@@ -28,6 +38,7 @@ export const metadata: Metadata = {
 const d = (delay: number) => ({ "--d": `${delay}s` }) as CSSProperties;
 const roman = ["I", "II", "III", "IV", "V"];
 const whatsapp = whatsappLink("Hello DS Construction, I would like to discuss a construction project.");
+const highlightIcons: Record<HighlightIcon, typeof Award> = { award: Award, layers: Layers, shield: ShieldCheck, hardhat: HardHat };
 
 export default function ConstructionPage() {
   const schema = {
@@ -48,7 +59,7 @@ export default function ConstructionPage() {
     <>
       <a
         href="#main"
-        className="fixed top-3 left-3 z-[100] -translate-y-20 bg-[#33291f] px-5 py-2.5 text-sm font-semibold text-[#f1e2bf] transition-transform focus:translate-y-0"
+        className="fixed top-3 left-3 z-[100] -translate-y-20 bg-[#d4af37] px-5 py-2.5 text-sm font-semibold text-[#0b1f3b] transition-transform focus:translate-y-0"
       >
         Skip to content
       </a>
@@ -56,54 +67,84 @@ export default function ConstructionPage() {
 
       <main id="main">
         {/* ------------------------------------------------------------ Hero */}
-        <section data-hero="" className="dsc-hero">
-          <div className="container-wide grid items-center gap-6 pb-14 lg:grid-cols-12 lg:pb-10">
-            <div className="lg:col-span-7">
-              <p className="dsc-eyebrow anim-rise" style={d(0.05)}>
-                {construction.descriptor}
-              </p>
-              <h1 className="mt-8">
-                <span className="sr-only">Built with precision. Delivered with integrity.</span>
-                {["Built with", "Precision."].map((line, i) => (
-                  <span key={line} aria-hidden className="block overflow-hidden pb-[0.06em]">
-                    <span className="anim-mask" style={d(0.12 + i * 0.09)}>
-                      {line}
+        <section data-hero="" className="dsc-hero dsc-dark">
+          <div className="dsc-hero-main">
+            <div className="dsc-hero-photo">
+              <div className="anim-zoom absolute inset-0">
+                {/* mirrored so the cranes stand clear of the headline; the navy wash over it is in construction.css */}
+                <Img
+                  src={images.construction.src}
+                  alt={images.construction.alt}
+                  fill
+                  preload
+                  quality={80}
+                  sizes="(min-width: 1024px) 64vw, 100vw"
+                  className="-scale-x-100 object-cover object-left"
+                />
+              </div>
+            </div>
+
+            <div className="container-wide relative w-full">
+              <div className="max-w-[40rem]">
+                <p className="dsc-eyebrow anim-rise" style={d(0.05)}>
+                  {construction.descriptor}
+                </p>
+                <h1 className="mt-7">
+                  <span className="sr-only">Built with precision. Delivered with integrity.</span>
+                  {["Built with", "Precision."].map((line, i) => (
+                    <span key={line} aria-hidden className="block overflow-hidden pb-[0.06em]">
+                      <span className="anim-mask" style={d(0.12 + i * 0.09)}>
+                        {line}
+                      </span>
+                    </span>
+                  ))}
+                  <span aria-hidden className="mt-1 block overflow-hidden pb-[0.14em] text-[0.66em]">
+                    <span className="anim-mask dsc-gold-text italic" style={d(0.32)}>
+                      Delivered with Integrity.
                     </span>
                   </span>
-                ))}
-                <span aria-hidden className="mt-2 block overflow-hidden pb-[0.12em] text-[0.56em]">
-                  <span className="anim-mask dsc-gold-text italic" style={d(0.32)}>
-                    Delivered with Integrity.
-                  </span>
-                </span>
-              </h1>
-              <p className="dsc-lead anim-rise mt-8 max-w-xl" style={d(0.42)}>
-                {construction.description}
-              </p>
-              <div className="anim-rise mt-10 flex flex-wrap gap-4" style={d(0.52)}>
-                <a href="#contact" className="dsc-btn dsc-btn-solid">
-                  Start a Project
-                  <ArrowRight aria-hidden />
-                </a>
-                <a href="#expertise" className="dsc-btn dsc-btn-line">
-                  Our Expertise
-                </a>
+                </h1>
+                <p className="dsc-lead anim-rise mt-6 max-w-xl text-white/85" style={d(0.42)}>
+                  {construction.description}
+                </p>
+                <div className="anim-rise mt-9 flex flex-wrap gap-4" style={d(0.52)}>
+                  <a href="#contact" className="dsc-btn dsc-btn-solid">
+                    Start a Project
+                    <ArrowRight aria-hidden />
+                  </a>
+                  <a href="#expertise" className="dsc-btn dsc-btn-line">
+                    Our Expertise
+                  </a>
+                </div>
+                <ul className="dsc-pillars anim-rise mt-12" style={d(0.62)}>
+                  {sectors.map((s) => (
+                    <li key={s.id}>
+                      <a href={`#sector-${s.id}`}>
+                        <SectorIcon kind={s.icon} className="size-10 shrink-0" strokeWidth={2.2} />
+                        {s.title}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <dl className="dsc-pillars anim-rise mt-14 max-w-2xl" style={d(0.62)}>
-                {sectors.map((s) => (
-                  <div key={s.title}>
-                    <dt>{s.numeral}.</dt>
-                    <dd>{s.title}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-            <div className="anim-rise lg:col-span-5" style={d(0.2)}>
-              <Tower3D />
             </div>
           </div>
-          <div aria-hidden className="absolute bottom-8 left-1/2 hidden -translate-x-1/2 lg:block">
-            <div className="dsc-scroll-cue" />
+
+          <div className="dsc-stats anim-rise" style={d(0.72)}>
+            <ul className="container-wide">
+              {highlights.map((h) => {
+                const Icon = highlightIcons[h.icon];
+                return (
+                  <li key={h.label} className="dsc-stat">
+                    <Icon aria-hidden strokeWidth={1.4} />
+                    <span className="min-w-0">
+                      <strong className={/^\d/.test(h.value) ? "dsc-stat-figure" : undefined}>{h.value}</strong>
+                      <span>{h.label}</span>
+                    </span>
+                  </li>
+                );
+              })}
+            </ul>
           </div>
         </section>
 
@@ -141,10 +182,10 @@ export default function ConstructionPage() {
 
             <RevealGroup className="mt-16 grid gap-5 lg:grid-cols-3">
               {sectors.map((s) => (
-                <RevealItem key={s.title}>
-                  <article className="dsc-sector glow-card">
+                <RevealItem key={s.id}>
+                  <article id={`sector-${s.id}`} className="dsc-sector glow-card scroll-mt-28">
                     <div className="flex items-start justify-between">
-                      <SectorIcon kind={s.icon} />
+                      <SectorIcon kind={s.icon} className="size-14 text-[var(--dsc-gold)]" />
                       <span aria-hidden className="dsc-numeral">
                         {s.numeral}
                       </span>
@@ -244,7 +285,10 @@ export default function ConstructionPage() {
             <RevealGroup className="grid gap-5 sm:grid-cols-2 lg:col-span-7">
               {standards.map((s) => (
                 <RevealItem key={s.title} className="dsc-standard">
-                  <h3>{s.title}</h3>
+                  <span aria-hidden className="dsc-standard-icon">
+                    <BadgeCheck className="size-5" strokeWidth={1.8} />
+                  </span>
+                  <h3 className="mt-5">{s.title}</h3>
                   <p className="mt-3 leading-relaxed">{s.text}</p>
                 </RevealItem>
               ))}
@@ -254,23 +298,22 @@ export default function ConstructionPage() {
 
         {/* ------------------------------------------------------------ Photo band */}
         <section className="dsc-band relative isolate flex min-h-[72vh] items-center overflow-hidden py-28">
-          {/* sepia warms the dusk photo's blue sky into the page's bronze palette */}
+          {/* the same dusk site as the hero, cropped to the lit glass blocks rather than the cranes */}
           <ParallaxImage
             image={images.construction}
-            className="absolute inset-0 -z-20 bg-[#33291f]"
-            imgClassName="[filter:sepia(0.6)_saturate(0.85)_brightness(0.9)]"
+            className="absolute inset-0 -z-20 bg-[#0b1f3b]"
+            imgClassName="object-right"
             strength={14}
             sizes="100vw"
           />
-          <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(30_23_16/0.88),rgb(30_23_16/0.55)_60%,rgb(30_23_16/0.35))]" />
+          <div aria-hidden className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgb(11_31_59/0.94),rgb(11_31_59/0.7)_55%,rgb(11_31_59/0.4))]" />
           <div className="container-wide">
             <Reveal>
               <blockquote className="max-w-4xl">
                 <p>
-                  Precision is not a finish applied at the end.{" "}
-                  <em className="text-[#e3cb98]">It is how every project begins.</em>
+                  Precision is not a finish applied at the end. <em className="dsc-gold-text">It is how every project begins.</em>
                 </p>
-                <footer className="dsc-sub mt-8 text-[#d9bf8a]!">— The DS Construction way</footer>
+                <footer className="dsc-label mt-8">— The DS Construction way</footer>
               </blockquote>
             </Reveal>
           </div>
@@ -279,7 +322,8 @@ export default function ConstructionPage() {
         {/* ------------------------------------------------------------ Contact */}
         <section id="contact" className="dsc-dark dsc-section scroll-mt-16">
           <div className="container-wide grid gap-14 lg:grid-cols-12">
-            <div className="lg:col-span-7">
+            {/* min-w-0: let the truncated contact values shrink instead of widening the grid track on phones */}
+            <div className="min-w-0 lg:col-span-7">
               <Reveal>
                 <p className="dsc-eyebrow">Start a Project</p>
               </Reveal>
@@ -291,7 +335,7 @@ export default function ConstructionPage() {
                   Tell us about the site, the scope and the timeline. We’ll come back with how we would approach it.
                 </p>
               </Reveal>
-              <Reveal delay={0.15} className="mt-12 border-b border-[rgb(217_191_138/0.18)]">
+              <Reveal delay={0.15} className="mt-12 border-b border-white/12">
                 {[
                   { href: telLink(), icon: <Phone className="size-5" />, label: "Call", value: site.contact.phoneDisplay },
                   { href: whatsapp, icon: <WhatsAppIcon className="size-5" />, label: "WhatsApp", value: site.contact.whatsappDisplay, external: true },
@@ -312,21 +356,21 @@ export default function ConstructionPage() {
                       {c.icon}
                     </span>
                     <span className="min-w-0">
-                      <span className="dsc-sub block text-[#d9bf8a]!">{c.label}</span>
+                      <span className="dsc-label block">{c.label}</span>
                       <span className="dsc-contact-value mt-1 block truncate">{c.value}</span>
                     </span>
-                    <ArrowUpRight aria-hidden className="ml-auto size-5 shrink-0 text-[#d9bf8a]" />
+                    <ArrowUpRight aria-hidden className="ml-auto size-5 shrink-0 text-[var(--dsc-gold)]" />
                   </a>
                 ))}
               </Reveal>
             </div>
             <Reveal delay={0.2} className="lg:col-span-5">
               <div className="dsc-brief">
-                <h3 className="dsc-serif text-[2rem] leading-tight text-[#f6f0e4]!">For a faster response, share:</h3>
+                <h3 className="dsc-serif text-[1.9rem] leading-tight text-white!">For a faster response, share:</h3>
                 <ul className="mt-6">
                   {enquiryChecklist.map((item) => (
-                    <li key={item} className="flex gap-4 border-t border-[rgb(217_191_138/0.16)] py-4">
-                      <span aria-hidden className="mt-2 size-1.5 shrink-0 rotate-45 bg-[#d9bf8a]" />
+                    <li key={item} className="flex gap-4 border-t border-white/10 py-4">
+                      <span aria-hidden className="mt-2 size-1.5 shrink-0 rotate-45 bg-[var(--dsc-gold)]" />
                       {item}
                     </li>
                   ))}
@@ -347,19 +391,19 @@ export default function ConstructionPage() {
       </main>
 
       {/* ------------------------------------------------------------ Footer */}
-      <footer className="dsc-dark border-t border-[rgb(217_191_138/0.14)] bg-[#2a211a]!">
+      <footer className="dsc-footer">
         <div className="container-wide grid gap-10 py-16 md:grid-cols-12">
           <div className="md:col-span-5">
             <div className="flex items-center gap-3">
-              <span aria-hidden className="dsc-mark text-[#d9bf8a]!">
+              <span aria-hidden className="dsc-mark">
                 DS
               </span>
-              <span className="dsc-serif text-[1.6rem] text-[#f6f0e4]!">DS Construction</span>
+              <span className="dsc-serif text-[1.6rem] text-white!">DS Construction</span>
             </div>
             <p className="mt-5 max-w-sm leading-relaxed">{construction.tagline}</p>
             <p className="mt-4 text-sm">
               A business of{" "}
-              <Link href="/" className="text-[#e3cb98] underline decoration-[rgb(217_191_138/0.4)] underline-offset-4 hover:decoration-[#e3cb98]">
+              <Link href="/" className="text-[var(--dsc-gold)] underline decoration-[rgb(212_175_55/0.4)] underline-offset-4 hover:decoration-[var(--dsc-gold)]">
                 DS Global Ventures
               </Link>
               .
@@ -369,7 +413,7 @@ export default function ConstructionPage() {
             <ul className="space-y-3 text-sm">
               {constructionNav.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="transition-colors hover:text-[#e3cb98]">
+                  <a href={l.href} className="transition-colors hover:text-[var(--dsc-gold)]">
                     {l.label}
                   </a>
                 </li>
@@ -377,23 +421,23 @@ export default function ConstructionPage() {
             </ul>
           </nav>
           <div className="space-y-3 text-sm md:col-span-4">
-            <a href={telLink()} className="block transition-colors hover:text-[#e3cb98]">
+            <a href={telLink()} className="block transition-colors hover:text-[var(--dsc-gold)]">
               {site.contact.phoneDisplay}
             </a>
-            <a href={mailLink("Construction enquiry — DS Construction")} className="block transition-colors hover:text-[#e3cb98]">
+            <a href={mailLink("Construction enquiry — DS Construction")} className="block transition-colors hover:text-[var(--dsc-gold)]">
               {site.contact.email}
             </a>
             <p>{site.contact.hoursShort}</p>
           </div>
         </div>
-        <div className="container-wide flex flex-col gap-3 border-t border-[rgb(217_191_138/0.12)] py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
+        <div className="container-wide flex flex-col gap-3 border-t border-white/10 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>
             © {site.copyrightYear} {construction.name}. {construction.parent}.
           </p>
           <ul className="flex flex-wrap gap-5">
             {legalNav.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="transition-colors hover:text-[#e3cb98]">
+                <Link href={l.href} className="transition-colors hover:text-[var(--dsc-gold)]">
                   {l.label}
                 </Link>
               </li>

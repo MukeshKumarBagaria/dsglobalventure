@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { productOptions } from "@/content/products";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { EnquiryForm } from "@/components/forms/enquiry-form";
+import { LogoImage } from "@/components/layout/logo";
 import { PageHero } from "@/components/sections/page-hero";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/ui/reveal";
@@ -55,8 +56,8 @@ export default function ContactPage() {
               <Reveal delay={0.1}>
                 <div className="surface-blue relative overflow-hidden rounded-[2rem] border border-brand-500/15 p-8">
                   <div className="bg-grid-light absolute inset-0 opacity-70" aria-hidden />
-                  <p className="relative font-display text-xl font-bold tracking-wide text-ink">DS GLOBAL VENTURES</p>
-                  <p className="relative mt-1 text-sm text-body">{site.tagline}</p>
+                  <LogoImage className="relative h-12" />
+                  <p className="relative mt-4 text-sm text-body">{site.tagline}</p>
                   <ul className="relative mt-8 divide-y divide-brand-700/10">
                     {details.map((d) => {
                       const content = (

@@ -1,9 +1,9 @@
 import type { SectorIcon as Kind } from "@/content/construction";
 
-/** Brass line drawings for the three client sectors. */
-export function SectorIcon({ kind }: { kind: Kind }) {
+/** Gold line drawings for the three client sectors — colour from `currentColor`; thicken the stroke when drawn small. */
+export function SectorIcon({ kind, className = "size-14", strokeWidth = 1.3 }: { kind: Kind; className?: string; strokeWidth?: number }) {
   return (
-    <svg viewBox="0 0 64 64" className="size-14" fill="none" stroke="#d9bf8a" strokeWidth={1.3} aria-hidden>
+    <svg viewBox="0 0 64 64" className={className} fill="none" stroke="currentColor" strokeWidth={strokeWidth} aria-hidden>
       {kind === "civic" ? (
         <>
           <path d="M6 22 32 8l26 14H6Z" />

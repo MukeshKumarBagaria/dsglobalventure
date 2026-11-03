@@ -669,7 +669,7 @@ Photography source: Unsplash (Unsplash Licence — free for commercial use). Cre
 ## 12. Client inputs still required before go-live
 - [ ] Phone, WhatsApp, email, office address, city for jurisdiction
 - [ ] Final domain (currently assumed `https://www.dsglobalventures.com`)
-- [ ] Logo files (SVG) — a typographic placeholder mark is used until supplied
+- [x] Logo — supplied as PNG (`assets/images/DS Global Ventures Logo.png`). An SVG version would make the favicon and small sizes sharper.
 - [ ] Confirmation of which products are actively traded (remove any that are not)
 - [ ] Email inbox that should receive enquiries + email provider credentials
 - [ ] GSTIN / registered entity name (optional, for footer)

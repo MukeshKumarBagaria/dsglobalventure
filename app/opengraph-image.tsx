@@ -1,8 +1,13 @@
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const alt = "DS Global Ventures — Reliable Chemical Sourcing. Trusted Global Trade.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
+
+// trimmed brand lockup, 1200×269
+const logo = `data:image/png;base64,${(await readFile(join(process.cwd(), "assets/images/logo.png"))).toString("base64")}`;
 
 export default function OpengraphImage() {
   const ring = [-90, -30, 30, 90, 150, 210].map((d) => {
@@ -25,27 +30,9 @@ export default function OpengraphImage() {
         }}
       >
         <div style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", flex: 1 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 18 }}>
-            <div
-              style={{
-                width: 64,
-                height: 64,
-                borderRadius: 16,
-                background: "linear-gradient(135deg,#5B9BF5,#174EAD)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#ffffff",
-                fontSize: 26,
-                fontWeight: 800,
-              }}
-            >
-              DS
-            </div>
-            <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ fontSize: 30, fontWeight: 700, letterSpacing: 2 }}>DS GLOBAL VENTURES</div>
-              <div style={{ fontSize: 16, letterSpacing: 5, color: "#1E63D6" }}>CHEMICAL TRADING &amp; SOURCING</div>
-            </div>
+          <div style={{ display: "flex" }}>
+            {/* eslint-disable-next-line @next/next/no-img-element -- ImageResponse renders plain <img> */}
+            <img src={logo} width={446} height={100} alt="" />
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <div style={{ fontSize: 72, fontWeight: 800, lineHeight: 1.05, letterSpacing: -2 }}>Reliable Chemical Sourcing.</div>

@@ -30,8 +30,10 @@ npm run lint
 
    Without these, enquiries are logged to the server console in development. In production, the form shows a
    one-click WhatsApp / email fallback with the enquiry pre-filled, so no lead is lost.
-4. Replace the typographic logo mark in [`components/layout/logo.tsx`](components/layout/logo.tsx) and
-   [`app/icon.svg`](app/icon.svg) if a brand logo is supplied.
+4. Brand logo: [`assets/images/logo.png`](assets/images/logo.png) is the supplied `DS Global Ventures Logo.png`
+   trimmed to the artwork (used by [`components/layout/logo.tsx`](components/layout/logo.tsx) and the OG image).
+   `app/favicon.ico`, `app/icon.png`, `app/apple-icon.png` and `public/icons/*` are cut from its hexagon mark —
+   regenerate them if the logo changes.
 5. Confirm the product list matches what is actually traded ([`content/products.ts`](content/products.ts)).
 
 ## Product catalogue (COA & MSDS)

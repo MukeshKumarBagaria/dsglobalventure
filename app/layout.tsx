@@ -85,7 +85,7 @@ const organizationSchema = {
       description: site.description,
       email: site.contact.email,
       telephone: site.contact.phoneE164,
-      logo: absoluteUrl("/icon.svg"),
+      logo: absoluteUrl("/icons/icon-512.png"),
       address: { "@type": "PostalAddress", addressCountry: "IN", streetAddress: site.contact.address },
       contactPoint: {
         "@type": "ContactPoint",

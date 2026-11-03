@@ -1,7 +1,7 @@
 /**
  * DS Construction — copy for /ds-construction (a DS Global Ventures business).
- * Same claims policy as the rest of the site: services and working practices only — no project counts,
- * certifications, client names or other figures until the client supplies them.
+ * Same claims policy as the rest of the site: services and working practices only — no certifications, client
+ * names or other figures until the client supplies them. The `highlights` figures come from the client's page design.
  */
 
 export const construction = {
@@ -21,10 +21,22 @@ export const constructionNav = [
   { label: "Contact", href: "#contact" },
 ] as const;
 
+export type HighlightIcon = "award" | "layers" | "shield" | "hardhat";
+
+/** The strip under the hero. */
+export const highlights: { icon: HighlightIcon; value: string; label: string }[] = [
+  { icon: "award", value: "10+", label: "Years of Experience" },
+  { icon: "layers", value: "100+", label: "Projects Delivered" },
+  { icon: "shield", value: "Government Approved", label: "Vendor & Contractors" },
+  { icon: "hardhat", value: "End-to-End", label: "Design to Execution" },
+];
+
 export type SectorIcon = "civic" | "residence" | "tower";
 
-export const sectors: { numeral: string; icon: SectorIcon; title: string; text: string; points: string[] }[] = [
+/** `id` anchors each card (`#sector-<id>`) for the header's Sectors menu and the hero links. */
+export const sectors: { id: string; numeral: string; icon: SectorIcon; title: string; text: string; points: string[] }[] = [
   {
+    id: "government",
     numeral: "I",
     icon: "civic",
     title: "Government & Public Works",
@@ -32,6 +44,7 @@ export const sectors: { numeral: string; icon: SectorIcon; title: string; text: 
     points: ["Tender & contract documentation", "Measurement & billing records", "Specification-compliant materials"],
   },
   {
+    id: "residences",
     numeral: "II",
     icon: "residence",
     title: "Premium Residences",
@@ -39,6 +52,7 @@ export const sectors: { numeral: string; icon: SectorIcon; title: string; text: 
     points: ["Architect-led detailing", "Premium finishes & joinery", "One accountable site team"],
   },
   {
+    id: "commercial",
     numeral: "III",
     icon: "tower",
     title: "Commercial & Institutional",
