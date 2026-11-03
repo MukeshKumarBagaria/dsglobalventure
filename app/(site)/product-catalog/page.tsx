@@ -1,49 +1,24 @@
 import type { Metadata } from "next";
 import { Download, Eye, Factory, FileText, FlaskConical, Send, Tag } from "lucide-react";
-import pdfjsPkg from "pdfjs-dist/package.json";
 import { CatalogBrowser } from "@/components/catalog/catalog-browser";
 import { CatalogCard } from "@/components/catalog/catalog-card";
-import { CatalogController } from "@/components/catalog/catalog-controller";
-import type { ViewerDoc, ViewerProduct } from "@/components/catalog/types";
 import { CtaBand } from "@/components/sections/cta-band";
 import { PageHero } from "@/components/sections/page-hero";
 import { Button } from "@/components/ui/button";
 import { Img } from "@/components/ui/img";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { SectionHeading } from "@/components/ui/section-heading";
-import {
-  catalog,
-  catalogCategories,
-  catalogDocuments,
-  docLabels,
-  documentUrl,
-  previewUrl,
-  PREVIEW_SIZE,
-} from "@/content/catalog";
-import { productOptions } from "@/content/products";
+import { catalog, catalogCategories, catalogDocuments, documentUrl, previewUrl, PREVIEW_SIZE } from "@/content/catalog";
 import { images } from "@/lib/images";
 import { absoluteUrl } from "@/lib/site";
 import { jsonLd } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Product Catalogue — Specification Sheets (COA)",
+  title: "Product Catalogue — Specification Sheets (COA) & Safety Data Sheets (MSDS)",
   description:
-    "Browse DS Global Ventures' product catalogue — specification sheets (COA) for Phenol, Methanol, MEG, Styrene, Isopropanol, Acetic Acid, Melamine, VAM, Paraffin Wax and more. View instantly, download, or request a quotation.",
+    "Browse DS Global Ventures' product catalogue — specification sheets (COA) and material safety data sheets (MSDS) for Phenol, Methanol, MEG, Styrene, Isopropanol, Acetic Acid, Melamine, VAM, Paraffin Wax and more. View instantly, download, or request a quotation.",
   alternates: { canonical: "/product-catalog" },
 };
-
-const viewerProducts: ViewerProduct[] = catalog.map(({ slug, name, cas }) => ({ slug, name, cas }));
-const viewerDocs: ViewerDoc[] = catalogDocuments.map((d) => ({
-  id: d.id,
-  type: d.type,
-  label: docLabels[d.type].long,
-  url: documentUrl(d),
-  preview: previewUrl(d),
-  file: d.file,
-  pages: d.pages,
-  sizeKB: d.sizeKB,
-  productSlug: d.product.slug,
-}));
 
 const categoryCounts = catalogCategories.map((name) => ({
   name,
@@ -79,7 +54,7 @@ const sheetContents = [
   },
 ];
 
-const [sampleSheet, sampleSheetBehind] = catalogDocuments;
+const [sampleSheet, sampleSheetBehind] = catalogDocuments.filter((d) => d.type === "COA");
 
 export default function ProductCatalogPage() {
   const itemList = {
@@ -109,13 +84,13 @@ export default function ProductCatalogPage() {
         ]}
         eyebrow="Product Catalogue"
         title="Product Catalogue & Specifications"
-        lead="Specification sheets for our product range — key quality parameters, CAS details and typical applications. View any sheet instantly, download it, or request a quotation in one click."
+        lead="Specification sheets (COA) and material safety data sheets (MSDS) for our product range — key quality parameters, CAS details, typical applications and safe-handling information. View any document instantly, download it, or request a quotation in one click."
         aside={
           <div className="rounded-[2rem] border border-white bg-white/85 p-6 shadow-[0_40px_90px_-35px_rgb(15_42_79/0.45)] backdrop-blur-md sm:p-7">
             <dl className="grid grid-cols-3 divide-x divide-line text-center">
               {[
                 [String(catalog.length), "Products"],
-                [String(catalogDocuments.length), "Spec sheets"],
+                [String(catalogDocuments.length), "PDF documents"],
                 [String(catalogCategories.length), "Categories"],
               ].map(([value, label]) => (
                 <div key={label} className="flex flex-col-reverse px-2">
@@ -145,7 +120,7 @@ export default function ProductCatalogPage() {
 
       <section id="catalogue" className="scroll-mt-24 bg-white pt-14 pb-24 md:pt-20 md:pb-28">
         <div className="container-wide">
-          <h2 className="sr-only">All products and specification sheets</h2>
+          <h2 className="sr-only">All products, specification sheets and safety data sheets</h2>
           <CatalogBrowser categories={categoryCounts} total={catalog.length}>
             <ul className="mt-6 grid gap-5 xl:grid-cols-2">
               {catalog.map((p) => (
@@ -237,13 +212,6 @@ export default function ProductCatalogPage() {
         title="Need a Product From the Catalogue?"
         text="Share the product, quantity and delivery location — our team will respond with availability and commercial terms."
         image={images.drums}
-      />
-
-      <CatalogController
-        products={viewerProducts}
-        docs={viewerDocs}
-        options={productOptions}
-        workerUrl={`/pdfjs/pdf.worker.${pdfjsPkg.version}.min.mjs`}
       />
     </>
   );

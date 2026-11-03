@@ -5,6 +5,7 @@ import { ArrowRight, Check, Info } from "lucide-react";
 import { Molecule } from "@/components/molecules/molecule";
 import { CtaBand } from "@/components/sections/cta-band";
 import { PageHero } from "@/components/sections/page-hero";
+import { ProductRangeIndex } from "@/components/sections/product-range-index";
 import { Button } from "@/components/ui/button";
 import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { Eyebrow, SectionHeading } from "@/components/ui/section-heading";
@@ -15,7 +16,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Products | Industrial Chemicals & Raw Materials",
   description:
-    "Phenol, Paraformaldehyde, Formaldehyde, Methanol, Acetone and other industrial chemicals sourced and supplied to your specification.",
+    "Alcohols, glycols, polymers, monomers and other industrial chemicals — Methanol, MEG, PVC, Styrene, VAM, Phenol, Melamine and more — with COA and MSDS documents, sourced and supplied to your specification.",
   alternates: { canonical: "/products" },
 };
 
@@ -31,9 +32,11 @@ export default function ProductsPage() {
       >
         <Button href="/contact">Request a Quote</Button>
         <Button href="/product-catalog" variant="glass">
-          Catalogue · Spec Sheets
+          Catalogue · COA &amp; MSDS
         </Button>
       </PageHero>
+
+      <ProductRangeIndex />
 
       <section className="bg-white pt-16 pb-8 md:pt-20">
         <div className="container-x">

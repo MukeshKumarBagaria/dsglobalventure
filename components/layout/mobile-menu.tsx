@@ -6,20 +6,68 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { Logo } from "@/components/layout/logo";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { businessNav, mainNav, type ProductNavItem } from "@/content/main-nav";
+import { businessNav, mainNav, type ProductMenuCategory } from "@/content/main-nav";
 import { site, telLink, whatsappLink } from "@/lib/site";
 import { cx as cn } from "@/lib/cx";
+
+function MenuLink({ href, label, meta, onClick }: { href: string; label: string; meta: string; onClick?: () => void }) {
+  return (
+    <Link href={href} onClick={onClick} className="flex items-center justify-between gap-4 py-2.5 pl-4 text-body hover:text-brand-700">
+      <span>{label}</span>
+      <span className="text-right font-mono text-[0.68rem] text-muted">{meta}</span>
+    </Link>
+  );
+}
+
+/** Products accordion: the range by category, then the catalogue and other-chemicals links. */
+function ProductLinks({ categories, onNavigate }: { categories: ProductMenuCategory[]; onNavigate: () => void }) {
+  // links close the menu themselves: a hash link on the current page (/products#meg) doesn't change the pathname
+  return (
+    <>
+      <div className="space-y-4 pt-1 pb-2 pl-4">
+        {categories.map((c) => (
+          <div key={c.id}>
+            <Link
+              href={c.href}
+              onClick={onNavigate}
+              className="font-mono text-[0.68rem] tracking-[0.16em] text-brand-700 uppercase hover:text-brand-600"
+            >
+              {c.label}
+            </Link>
+            <ul className="mt-1 grid grid-cols-2 gap-x-4">
+              {c.items.map((p) => (
+                <li key={p.slug}>
+                  <Link href={p.href} onClick={onNavigate} className="block py-1.5 text-body hover:text-brand-700">
+                    {p.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <ul className="border-t border-line">
+        <li>
+          <MenuLink href="/product-catalog" label="Product Catalogue" meta="COA & MSDS" onClick={onNavigate} />
+        </li>
+        <li>
+          <MenuLink href="/products/other-chemicals" label="Other Chemicals" meta="Send your requirement" onClick={onNavigate} />
+        </li>
+      </ul>
+    </>
+  );
+}
 
 export function MobileMenu({
   open,
   onClose,
   pathname,
-  productNav,
+  productMenu,
 }: {
   open: boolean;
   onClose: () => void;
   pathname: string;
-  productNav: ProductNavItem[];
+  productMenu: ProductMenuCategory[];
 }) {
   const [productsOpen, setProductsOpen] = useState(false);
   const [businessesOpen, setBusinessesOpen] = useState(false);
@@ -99,7 +147,6 @@ export function MobileMenu({
                         </div>
                         {(() => {
                           const isOpen = item.children === "products" ? productsOpen : businessesOpen;
-                          const links = item.children === "products" ? productNav : businessNav;
                           return (
                             <div
                               className={cn(
@@ -107,20 +154,20 @@ export function MobileMenu({
                                 isOpen ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
                               )}
                             >
-                              <ul className="overflow-hidden" inert={!isOpen}>
-                                {links.map((p) => (
-                                  <li key={p.href}>
-                                    <Link
-                                      href={p.href}
-                                      className="flex items-center justify-between gap-4 py-2.5 pl-4 text-body hover:text-brand-700"
-                                    >
-                                      <span>{p.label}</span>
-                                      <span className="text-right font-mono text-[0.68rem] text-muted">{p.meta}</span>
-                                    </Link>
-                                  </li>
-                                ))}
-                                <li className="h-3" />
-                              </ul>
+                              <div className="overflow-hidden" inert={!isOpen}>
+                                {item.children === "products" ? (
+                                  <ProductLinks categories={productMenu} onNavigate={onClose} />
+                                ) : (
+                                  <ul>
+                                    {businessNav.map((p) => (
+                                      <li key={p.href}>
+                                        <MenuLink href={p.href} label={p.label} meta={p.meta} />
+                                      </li>
+                                    ))}
+                                  </ul>
+                                )}
+                                <div className="h-3" />
+                              </div>
                             </div>
                           );
                         })()}

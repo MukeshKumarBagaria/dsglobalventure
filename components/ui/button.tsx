@@ -68,11 +68,14 @@ export function Button(props: ButtonAsLink | ButtonAsButton) {
   if (typeof rest.href === "string") {
     const { href, ...linkRest } = rest as ButtonAsLink;
     const external = /^(https?:|tel:|mailto:)/.test(href);
-    if (external) {
+    // files skip the client router; their extra props (e.g. data-doc-open for the PDF viewer) pass through
+    const file = !external && /\.pdf$/.test(href);
+    if (external || file) {
       return (
         <a
           href={href}
           className={classes}
+          {...(file ? linkRest : {})}
           {...(href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
         >
           <Inner icon={icon} arrow={showArrow}>

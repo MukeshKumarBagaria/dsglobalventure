@@ -70,7 +70,7 @@ function SpecSheetRequest({ product }: { product: CatalogProduct }) {
 }
 
 export function CatalogCard({ product }: { product: CatalogProduct }) {
-  const sheet = product.documents.find((d) => d.type === "COA");
+  const hasCoa = product.documents.some((d) => d.type === "COA");
   const search = [product.name, product.label, product.cas, product.formula, product.category, product.summary, ...product.uses]
     .join(" ")
     .toLowerCase();
@@ -116,7 +116,12 @@ export function CatalogCard({ product }: { product: CatalogProduct }) {
         )}
 
         <div className="mt-auto pt-6">
-          {sheet ? <SpecSheet product={product} doc={sheet} /> : <SpecSheetRequest product={product} />}
+          <div className="space-y-2.5">
+            {hasCoa ? null : <SpecSheetRequest product={product} />}
+            {product.documents.map((d) => (
+              <SpecSheet key={d.id} product={product} doc={d} />
+            ))}
+          </div>
 
           <footer className="mt-5 flex flex-wrap items-center gap-2.5 border-t border-line pt-5">
             <a

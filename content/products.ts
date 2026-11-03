@@ -1,5 +1,6 @@
 import type { ImageKey } from "@/lib/images";
 import { catalog } from "@/content/catalog";
+import { productRange } from "@/content/product-range";
 
 export type ProductSlug = "phenol" | "paraformaldehyde" | "formaldehyde" | "methanol" | "acetone";
 
@@ -178,12 +179,16 @@ export const products: Product[] = [
   },
 ];
 
-/** Enquiry-form options: core products first, then the rest of the catalogue. */
+const catalogOnly = catalog.filter((c) => !products.some((p) => p.slug === c.slug));
+
+/** Enquiry-form options: core products first, then the rest of the catalogue, then the rest of the product range. */
 export const productOptions = [
   ...products.map((p) => ({ value: p.slug as string, label: p.name })),
-  ...catalog
-    .filter((c) => !products.some((p) => p.slug === c.slug))
-    .map((c) => ({ value: c.slug, label: c.label })),
+  ...catalogOnly.map((c) => ({ value: c.slug, label: c.label })),
+  ...productRange
+    .flatMap((c) => c.items)
+    .filter((i) => !products.some((p) => p.slug === i.slug) && !catalogOnly.some((c) => c.slug === i.slug))
+    .map((i) => ({ value: i.slug, label: i.fullName ? `${i.name} (${i.fullName})` : i.name })),
   { value: "other", label: "Other Chemical" },
 ];
 

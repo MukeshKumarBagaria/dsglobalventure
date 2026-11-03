@@ -1,11 +1,11 @@
 /**
- * Product catalogue — products and their specification sheets (COA).
+ * Product catalogue — products and their technical documents (COA / MSDS).
  * PDFs live in /public/documents, page-1 previews in /public/documents/previews
  * (regenerate previews with: `qlmanage -t -s 1224 -o <out> file.pdf` then convert to JPEG).
  * Key specifications below are copied from each product's COA (specification sheet).
  */
 
-export type DocType = "COA";
+export type DocType = "COA" | "MSDS";
 
 export type CatalogDoc = {
   id: string;
@@ -51,6 +51,7 @@ export const catalogCategories: CatalogCategory[] = [
 
 export const docLabels: Record<DocType, { short: string; long: string }> = {
   COA: { short: "COA", long: "Specification sheet" },
+  MSDS: { short: "MSDS", long: "Material Safety Data Sheet" },
 };
 
 const doc = (slug: string, type: DocType, name: string, pages: number, sizeKB: number): CatalogDoc => ({
@@ -77,7 +78,7 @@ export const catalog: CatalogProduct[] = [
       { label: "Moisture", value: "0.1% max" },
     ],
     uses: ["PF resins", "Bisphenol-A", "Dyestuffs", "Surfactants"],
-    documents: [doc("phenol", "COA", "Phenol", 1, 207)],
+    documents: [doc("phenol", "COA", "Phenol", 1, 207), doc("phenol", "MSDS", "Phenol", 4, 255)],
     href: "/products/phenol",
   },
   {
@@ -96,7 +97,7 @@ export const catalog: CatalogProduct[] = [
       { label: "Moisture", value: "0.1% max" },
     ],
     uses: ["Formaldehyde", "Pharma solvent", "Biodiesel", "Coatings"],
-    documents: [doc("methanol", "COA", "Methanol", 1, 122)],
+    documents: [doc("methanol", "COA", "Methanol", 1, 122), doc("methanol", "MSDS", "Methanol", 5, 85)],
     href: "/products/methanol",
   },
   {
@@ -114,7 +115,7 @@ export const catalog: CatalogProduct[] = [
       { label: "Moisture", value: "0.2% max" },
     ],
     uses: ["PET fibre", "Antifreeze", "Alkyd resins", "Printing inks"],
-    documents: [doc("meg", "COA", "MEG", 1, 219)],
+    documents: [doc("meg", "COA", "MEG", 1, 219), doc("meg", "MSDS", "MEG", 5, 79)],
   },
   {
     slug: "styrene",
@@ -131,7 +132,7 @@ export const catalog: CatalogProduct[] = [
       { label: "Inhibitor", value: "10–15 ppm" },
     ],
     uses: ["Polystyrene", "Resins", "SBR rubber"],
-    documents: [doc("styrene", "COA", "Styrene", 1, 108)],
+    documents: [doc("styrene", "COA", "Styrene", 1, 108), doc("styrene", "MSDS", "Styrene", 5, 252)],
   },
   {
     slug: "isopropanol",
@@ -148,7 +149,7 @@ export const catalog: CatalogProduct[] = [
       { label: "Distillation", value: "81–84 °C" },
     ],
     uses: ["Pharma solvent", "Printing inks", "Cosmetics", "Esters"],
-    documents: [doc("isopropanol", "COA", "Isopropanol", 1, 214)],
+    documents: [doc("isopropanol", "COA", "Isopropanol", 1, 214), doc("isopropanol", "MSDS", "Isopropanol", 5, 83)],
   },
   {
     slug: "acetic-acid",
@@ -165,7 +166,7 @@ export const catalog: CatalogProduct[] = [
       { label: "Crystallization", value: "15.7 °C min" },
     ],
     uses: ["VAM", "PTA / textiles", "Pharma", "Agrochemicals"],
-    documents: [doc("acetic-acid", "COA", "AceticAcid", 1, 215)],
+    documents: [doc("acetic-acid", "COA", "AceticAcid", 1, 215), doc("acetic-acid", "MSDS", "AceticAcid", 5, 163)],
   },
   {
     slug: "adipic-acid",
@@ -181,7 +182,7 @@ export const catalog: CatalogProduct[] = [
       { label: "EINECS", value: "204-673-3" },
     ],
     uses: ["Nylon 6,6", "Polyurethanes", "Plasticizers"],
-    documents: [],
+    documents: [doc("adipic-acid", "MSDS", "AdipicAcid", 4, 177)],
   },
   {
     slug: "melamine",
@@ -198,7 +199,7 @@ export const catalog: CatalogProduct[] = [
       { label: "Bulk density", value: "800–1100 g/L" },
     ],
     uses: ["MF resins", "Adhesives", "Laminates"],
-    documents: [doc("melamine", "COA", "Melamine", 1, 110)],
+    documents: [doc("melamine", "COA", "Melamine", 1, 110), doc("melamine", "MSDS", "Melamine", 4, 74)],
   },
   {
     slug: "vam",
@@ -230,7 +231,7 @@ export const catalog: CatalogProduct[] = [
       { label: "Sulphated ash", value: "0.1% max" },
     ],
     uses: ["Candles & paper", "Waterproofing", "Cosmetics", "Pharma"],
-    documents: [doc("paraffin-wax", "COA", "ParaffinWax", 1, 111)],
+    documents: [doc("paraffin-wax", "COA", "ParaffinWax", 1, 111), doc("paraffin-wax", "MSDS", "ParaffinWax", 4, 235)],
   },
   {
     slug: "paraformaldehyde",

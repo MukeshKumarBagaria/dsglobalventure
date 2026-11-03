@@ -2,6 +2,15 @@
 export type NavItem = { label: string; href: string };
 export type ProductNavItem = NavItem & { meta: string; slug: string };
 
+export type ProductMenuItem = NavItem & {
+  slug: string;
+  /** the product's first PDF — the viewer opens it with the product's other documents as tabs */
+  doc?: { id: string; url: string; types: string[] };
+};
+
+/** A product-range category as shown in the Products mega menu and mobile menu */
+export type ProductMenuCategory = NavItem & { id: string; items: ProductMenuItem[] };
+
 export type BusinessNavItem = NavItem & { meta: string };
 
 /** Sister businesses in the DS Global Ventures group — the "Our Other Businesses" menu */

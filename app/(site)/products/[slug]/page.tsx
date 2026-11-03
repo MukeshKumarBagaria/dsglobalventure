@@ -13,7 +13,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/ui/reveal";
 import { Eyebrow, SectionHeading } from "@/components/ui/section-heading";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
 import { getIndustry } from "@/content/industries";
-import { getDocumentsFor } from "@/content/catalog";
+import { documentUrl, getDocumentsFor } from "@/content/catalog";
 import { availableInformation, getProduct, productFaqs, productOptions, products } from "@/content/products";
 import { images } from "@/lib/images";
 import { absoluteUrl, site, telLink, whatsappLink } from "@/lib/site";
@@ -49,7 +49,8 @@ async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) 
   if (!product) notFound();
 
   const related = products.filter((p) => p.slug !== product.slug);
-  const coa = getDocumentsFor(product.slug).find((d) => d.type === "COA");
+  const docs = getDocumentsFor(product.slug);
+  const msds = docs.find((d) => d.type === "MSDS");
   const facts: [string, string][] = [
     ["CAS No.", product.cas],
     ["Molecular formula", `${product.formulaDisplay} (${product.formula})`],
@@ -115,9 +116,16 @@ async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) 
         >
           WhatsApp Enquiry
         </Button>
-        {coa ? (
-          <Button href={`/product-catalog#doc=${coa.id}`} variant="soft" arrow={false} icon={<FileText className="size-4" />}>
-            View Specification Sheet
+        {docs[0] ? (
+          // opens in the in-page PDF viewer, with the product's other documents as tabs
+          <Button
+            href={documentUrl(docs[0])}
+            data-doc-open={docs[0].id}
+            variant="soft"
+            arrow={false}
+            icon={<FileText className="size-4" />}
+          >
+            {`View ${docs.map((d) => d.type).join(" & ")}`}
           </Button>
         ) : null}
       </PageHero>
@@ -236,13 +244,24 @@ async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) 
                 <h2 className="text-xl font-bold tracking-tight">Safety &amp; Handling</h2>
               </div>
               <p className="mt-5 leading-relaxed text-ink/85">{product.safety}</p>
-              <Link
-                href={`/contact?product=${product.slug}&doc=SDS`}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-brand-700"
-              >
-                <FileText className="size-4" aria-hidden />
-                {`Request SDS for ${product.name}`}
-              </Link>
+              {msds ? (
+                <a
+                  href={documentUrl(msds)}
+                  data-doc-open={msds.id}
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-brand-700"
+                >
+                  <FileText className="size-4" aria-hidden />
+                  {`View the ${product.name} Material Safety Data Sheet (MSDS)`}
+                </a>
+              ) : (
+                <Link
+                  href={`/contact?product=${product.slug}&doc=SDS`}
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-ink underline decoration-amber-400 decoration-2 underline-offset-4 hover:text-brand-700"
+                >
+                  <FileText className="size-4" aria-hidden />
+                  {`Request SDS for ${product.name}`}
+                </Link>
+              )}
             </div>
           </Reveal>
         </div>

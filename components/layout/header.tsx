@@ -10,7 +10,7 @@ import { MegaMenu } from "@/components/layout/mega-menu";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { mainNav, type ProductNavItem } from "@/content/main-nav";
+import { mainNav, type ProductMenuCategory } from "@/content/main-nav";
 import { mailLink, site, telLink, whatsappLink } from "@/lib/site";
 import { useScrollY } from "@/lib/use-scroll-y";
 import { cx as cn } from "@/lib/cx";
@@ -19,7 +19,7 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-export function Header({ productNav, ticker }: { productNav: ProductNavItem[]; ticker?: ReactNode }) {
+export function Header({ productMenu, ticker }: { productMenu: ProductMenuCategory[]; ticker?: ReactNode }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
@@ -116,9 +116,10 @@ export function Header({ productNav, ticker }: { productNav: ProductNavItem[]; t
           <div className="container-wide flex h-[72px] items-center justify-between gap-6">
             <Logo eager />
 
-            {/* tighter padding until 2xl so labels never wrap at 1280px */}
-            <nav aria-label="Main" className="hidden xl:block">
-              <ul className="flex items-center gap-1">
+            {/* tighter padding until 2xl so labels never wrap at 1280px; stretched to the bar height so the
+                products menu (positioned against the bar) opens without a hover gap */}
+            <nav aria-label="Main" className="hidden self-stretch xl:block">
+              <ul className="flex h-full items-center gap-1">
                 {mainNav.map((item) =>
                   item.children === "businesses" ? (
                     <BusinessesMenu key={item.href} label={item.label} href={item.href} active={isActive(pathname, item.href)} />
@@ -132,7 +133,7 @@ export function Header({ productNav, ticker }: { productNav: ProductNavItem[]; t
                       onBlur={(e) => {
                         if (!productsRef.current?.contains(e.relatedTarget as Node)) scheduleClose();
                       }}
-                      className="relative"
+                      className="flex h-full items-center"
                     >
                       <Link
                         href={item.href}
@@ -149,7 +150,7 @@ export function Header({ productNav, ticker }: { productNav: ProductNavItem[]; t
                           aria-hidden
                         />
                       </Link>
-                      <MegaMenu open={megaOpen} items={productNav} onNavigate={() => setMegaOpen(false)} />
+                      <MegaMenu open={megaOpen} categories={productMenu} onNavigate={() => setMegaOpen(false)} />
                     </li>
                   ) : (
                     // Home is hidden until 2xl (the logo links home) so nine items fit at 1280px
@@ -190,7 +191,7 @@ export function Header({ productNav, ticker }: { productNav: ProductNavItem[]; t
         </div>
       </header>
 
-      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} productNav={productNav} />
+      <MobileMenu open={mobileOpen} onClose={() => setMobileOpen(false)} pathname={pathname} productMenu={productMenu} />
     </>
   );
 }
