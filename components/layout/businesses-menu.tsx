@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import { businessNav } from "@/content/main-nav";
 import { cx as cn } from "@/lib/cx";
 
-/** Desktop "Our Businesses" dropdown — opens on hover or keyboard focus, closes on leave, blur or Escape. */
+/** Desktop "Our Other Businesses" dropdown — opens on hover or keyboard focus, closes on leave, blur or Escape. */
 export function BusinessesMenu({ label, href, active }: { label: string; href: string; active: boolean }) {
   const [open, setOpen] = useState(false);
   const closeTimer = useRef<number | undefined>(undefined);

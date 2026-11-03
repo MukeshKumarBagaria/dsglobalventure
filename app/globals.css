@@ -333,12 +333,15 @@ main ~ footer {
   to { transform: translate3d(calc(var(--o) * 46px), calc(var(--oa) * 22px), 0) rotate(calc(var(--o) * 7deg)); }
 }
 
-/* Commitment quote — words brighten one by one */
+/* Commitment quote — the text fills with ink word after word, in reading order, as it scrolls up the screen.
+   Each word's text is painted with a two-tone gradient twice its width (ink | pale) and the gradient slides from
+   the pale half to the ink half, so the ink edge sweeps through the word. Words take consecutive slices of the
+   range, so the sweep runs on from word to word. Base style is the filled state (reduced motion, no support). */
 .quote-track { view-timeline-name: --quote; }
 .quote-word { color: var(--to); }
-@keyframes word-in {
-  from { color: #7b8a9e; }
-  to { color: var(--to); }
+@keyframes word-fill {
+  from { background-position: 100% 0; }
+  to { background-position: 0 0; }
 }
 
 /* Home trust cards — photo URLs arrive as --photo-sm / --photo-lg from trust-section.tsx. A photo is requested
@@ -435,10 +438,15 @@ main ~ footer {
 @supports (animation-timeline: view()) {
   @media (prefers-reduced-motion: no-preference) {
     .doc-card { animation: doc-spread linear both; animation-timeline: --docs; animation-range: entry 0% cover 50%; }
+    /* fills between the quote's top crossing ~85% and ~20% down the screen */
     .quote-word {
-      animation: word-in linear both;
+      background: linear-gradient(90deg, var(--to) 50%, #c5cfdc 50%) 100% 0 / 200% 100% no-repeat;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: word-fill linear both;
       animation-timeline: --quote;
-      animation-range: cover calc(18% + var(--i) * 1.6%) cover calc(22% + var(--i) * 1.6%);
+      animation-range: cover calc(12% + var(--i) * 38% / var(--n)) cover calc(12% + (var(--i) + 1) * 38% / var(--n));
     }
     /* phones/tablets: vertical line; each step lights as it crosses the same 62% line the fill's tip is on */
     .process-fill-y, .process-head-y { animation: fill-y linear both; animation-timeline: --process; animation-range: cover 0% cover 100%; }

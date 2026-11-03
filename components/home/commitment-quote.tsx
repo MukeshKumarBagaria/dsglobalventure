@@ -4,7 +4,7 @@ import { commitmentQuote } from "@/content/company";
 
 const accents = new Set(["reliability,", "communication,", "specifications,", "documentation", "execution."]);
 
-/** Words brighten one by one as the section scrolls (CSS scroll-driven animation, no JS). */
+/** The quote fills with ink word by word, left to right, as the section scrolls (CSS scroll-driven animation, no JS). */
 export function CommitmentQuote() {
   const words = commitmentQuote.split(" ");
   return (
@@ -12,7 +12,10 @@ export function CommitmentQuote() {
       <div className="quote-track container-x max-w-5xl text-center">
         <Eyebrow className="justify-center">Our Commitment</Eyebrow>
         <blockquote className="mt-8">
-          <p className="font-display text-[clamp(1.75rem,3.8vw,3.25rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-ink">
+          <p
+            className="font-display text-[clamp(1.75rem,3.8vw,3.25rem)] leading-[1.2] font-semibold tracking-[-0.02em] text-ink"
+            style={{ "--n": words.length } as CSSProperties}
+          >
             <span className="text-brand-500">“</span>
             {words.map((w, i) => (
               <span

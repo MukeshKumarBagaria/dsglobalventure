@@ -5,7 +5,8 @@ import { processSteps } from "@/content/company";
  * Five-step sourcing process. As the section scrolls, the line fills with a glowing head on its tip and each step
  * lights up when the line reaches it (CSS scroll-driven animations — see "Process timeline" in globals.css; no
  * JavaScript). `data-draw` only asks the boot script to mark the track `.is-in`, which plays a time-based version
- * in browsers without scroll-driven animations.
+ * in browsers without scroll-driven animations. No ancestor may be `overflow: hidden` (use `overflow-clip`): that
+ * makes it the timeline's scroll container, and since it never scrolls the line stays frozen part-way.
  */
 export function ProcessTimeline() {
   return (

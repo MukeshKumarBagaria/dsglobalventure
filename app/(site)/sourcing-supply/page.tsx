@@ -64,8 +64,9 @@ export default function SourcingSupplyPage() {
         </div>
       </section>
 
-      {/* Process */}
-      <section id="process" className="surface-blue section-y relative scroll-mt-20 overflow-hidden">
+      {/* Process — overflow-clip, not -hidden: a hidden box is a scroll container, which would pin the timeline's
+          scroll animation */}
+      <section id="process" className="surface-blue section-y relative scroll-mt-20 overflow-clip">
         <div className="bg-grid-light pointer-events-none absolute inset-0 opacity-70" aria-hidden />
         <div className="container-x relative">
           <SectionHeading

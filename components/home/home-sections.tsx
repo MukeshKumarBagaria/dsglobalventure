@@ -255,7 +255,8 @@ export function IndustriesPreview() {
 /* ---------------------------------------------------------------- Process */
 export function ProcessSection() {
   return (
-    <section className="section-y bg-grid-light relative overflow-hidden bg-mist">
+    // overflow-clip, not -hidden: a hidden box is a scroll container, which would pin the timeline's scroll animation
+    <section className="section-y bg-grid-light relative overflow-clip bg-mist">
       <div className="container-x relative">
         <SectionHeading
           align="center"

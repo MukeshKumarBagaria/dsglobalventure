@@ -4,7 +4,7 @@ export type ProductNavItem = NavItem & { meta: string; slug: string };
 
 export type BusinessNavItem = NavItem & { meta: string };
 
-/** Sister businesses in the DS Global Ventures group — the "Our Businesses" menu */
+/** Sister businesses in the DS Global Ventures group — the "Our Other Businesses" menu */
 export const businessNav: BusinessNavItem[] = [
   { label: "DS Construction", href: "/ds-construction", meta: "Premium & government construction" },
 ];
@@ -17,7 +17,7 @@ export const mainNav: (NavItem & { children?: "products" | "businesses" })[] = [
   { label: "Sourcing & Supply", href: "/sourcing-supply" },
   { label: "Quality", href: "/quality" },
   { label: "Blog", href: "/blog" },
-  { label: "Our Businesses", href: "/ds-construction", children: "businesses" },
+  { label: "Our Other Businesses", href: "/ds-construction", children: "businesses" },
   { label: "Contact", href: "/contact" },
 ];
 
