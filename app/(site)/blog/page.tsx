@@ -1,3 +1,4 @@
+import { ogImages } from "@/lib/seo";
 import type { Metadata } from "next";
 import { CtaBand } from "@/components/sections/cta-band";
 import { InsightsList } from "@/components/sections/insights-list";
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
   title: "Blog — Insights & Industry Updates",
   description,
   alternates: { canonical: "/blog" },
-  openGraph: { title: `Insights & Industry Updates | ${site.name}`, description },
+  openGraph: { title: `Insights & Industry Updates | ${site.name}`, description, images: ogImages },
 };
 
 export default function BlogPage() {

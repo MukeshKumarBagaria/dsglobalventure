@@ -1,3 +1,4 @@
+import { ogImages } from "@/lib/seo";
 import type { Metadata } from "next";
 import { Img as Image } from "@/components/ui/img";
 import Link from "next/link";
@@ -31,7 +32,7 @@ export async function generateMetadata({ params }: PageProps<"/products/[slug]">
     title: product.seoTitle,
     description: product.seoDescription,
     alternates: { canonical: `/products/${product.slug}` },
-    openGraph: { title: `${product.seoTitle} | ${site.name}`, description: product.seoDescription },
+    openGraph: { title: `${product.seoTitle} | ${site.name}`, description: product.seoDescription, images: ogImages },
   };
 }
 

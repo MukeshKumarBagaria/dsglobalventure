@@ -5,13 +5,12 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Clock, Mail, Menu, Phone } from "lucide-react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BusinessesMenu } from "@/components/layout/businesses-menu";
-import { InsightsMenu } from "@/components/layout/insights-menu";
 import { Logo } from "@/components/layout/logo";
 import { MegaMenu } from "@/components/layout/mega-menu";
 import { MobileMenu } from "@/components/layout/mobile-menu";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { insightsNav, mainNav, type ProductMenuCategory } from "@/content/main-nav";
+import { mainNav, type ProductMenuCategory } from "@/content/main-nav";
 import { mailLink, site, telLink, whatsappLink } from "@/lib/site";
 import { useScrollY } from "@/lib/use-scroll-y";
 import { cx as cn } from "@/lib/cx";
@@ -114,7 +113,7 @@ export function Header({ productMenu, ticker }: { productMenu: ProductMenuCatego
               : "border-line/70 bg-white/95 backdrop-blur-md",
           )}
         >
-          <div className="container-wide flex h-[72px] items-center justify-between gap-6">
+          <div className="container-wide flex h-[72px] items-center justify-between gap-3 2xl:gap-6">
             <Logo eager />
 
             {/* compact padding at every desktop width (the content area stops growing at 1440px), slightly larger type
@@ -125,13 +124,7 @@ export function Header({ productMenu, ticker }: { productMenu: ProductMenuCatego
                 {mainNav.map((item) =>
                   item.children === "businesses" ? (
                     <BusinessesMenu key={item.href} label={item.label} href={item.href} active={isActive(pathname, item.href)} />
-                  ) : item.children === "insights" ? (
-                    <InsightsMenu
-                      key={item.href}
-                      label={item.label}
-                      href={item.href}
-                      active={insightsNav.some((i) => isActive(pathname, i.href))}
-                    />
+                 
                   ) : item.children === "products" ? (
                     <li
                       key={item.href}
@@ -149,7 +142,7 @@ export function Header({ productMenu, ticker }: { productMenu: ProductMenuCatego
                         aria-expanded={megaOpen}
                         aria-haspopup="true"
                         className={cn(
-                          "flex items-center gap-1.5 rounded-full px-2 py-2 text-[0.84rem] font-medium whitespace-nowrap transition-colors 2xl:px-2.5 2xl:text-[0.875rem]",
+                          "flex items-center gap-1.5 rounded-full px-1.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-colors 2xl:px-2.5 2xl:text-[0.875rem]",
                           isActive(pathname, item.href) ? "text-brand-700" : "text-ink/75 hover:text-ink",
                         )}
                       >
@@ -167,13 +160,13 @@ export function Header({ productMenu, ticker }: { productMenu: ProductMenuCatego
                       <Link
                         href={item.href}
                         className={cn(
-                          "relative rounded-full px-2 py-2 text-[0.84rem] font-medium whitespace-nowrap transition-colors 2xl:px-2.5 2xl:text-[0.875rem]",
+                          "relative rounded-full px-1.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-colors 2xl:px-2.5 2xl:text-[0.875rem]",
                           isActive(pathname, item.href) ? "text-brand-700" : "text-ink/75 hover:text-ink",
                         )}
                       >
                         {item.label}
                         {isActive(pathname, item.href) ? (
-                          <span aria-hidden className="absolute inset-x-2 -bottom-1.5 h-0.5 rounded-full bg-brand-600 2xl:inset-x-2.5" />
+                          <span aria-hidden className="absolute inset-x-1.5 -bottom-1.5 h-0.5 rounded-full bg-brand-600 2xl:inset-x-2.5" />
                         ) : null}
                       </Link>
                     </li>

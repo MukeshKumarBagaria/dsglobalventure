@@ -10,9 +10,9 @@ import { Eyebrow, SectionHeading } from "@/components/ui/section-heading";
 import { images } from "@/lib/images";
 
 export const metadata: Metadata = {
-  title: "Other Industrial Chemicals — Send Your Requirement",
+  title: "Source Other Industrial Chemicals",
   description:
-    "Looking for an industrial chemical that is not listed? Share the product name, specification and quantity with DS Global Ventures.",
+    "Looking for an industrial chemical that is not listed? Share the product name, specification and quantity and our team will source it for you.",
   alternates: { canonical: "/products/other-chemicals" },
 };
 

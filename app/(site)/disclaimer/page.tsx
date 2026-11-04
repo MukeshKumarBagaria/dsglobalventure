@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/sections/legal-page";
 
 export const metadata: Metadata = {
   title: "Disclaimer",
-  description: "Disclaimer for product and chemical information published on the DS Global Ventures website.",
+  description: "Disclaimer for the product, specification and chemical information published on the DS Global Ventures website, including typical values and market prices.",
   alternates: { canonical: "/disclaimer" },
 };
 

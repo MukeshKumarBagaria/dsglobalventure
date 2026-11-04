@@ -1,20 +1,20 @@
+import { ogImages } from "@/lib/seo";
 import type { Metadata } from "next";
 import { ArrowDownRight, ArrowUpRight, CalendarDays } from "lucide-react";
 import { ChangeBadge, PricesTable } from "@/components/prices/prices-table";
 import { CtaBand } from "@/components/sections/cta-band";
 import { PageHero } from "@/components/sections/page-hero";
-import { Reveal } from "@/components/ui/reveal";
 import { getPublishedPrices, type PublishedPrice } from "@/lib/commodity-prices/data";
 import { images } from "@/lib/images";
 
 const description =
-  "Daily China spot prices for industrial chemicals — n-Heptane, ECH, methanol, urea, titanium dioxide, PX and more — in RMB, with the day-on-day change. Source: SunSirs.";
+  "Daily China spot prices for industrial chemicals — n-Heptane, ECH, urea, titanium dioxide, PX and more — in RMB, with the day-on-day change. Source: SunSirs.";
 
 export const metadata: Metadata = {
-  title: "Chemical Spot Prices — Daily China Market Prices",
+  title: "Chemical Spot Prices | Daily China Prices",
   description,
   alternates: { canonical: "/chemical-prices" },
-  openGraph: { title: "Chemical Spot Prices | DS Global Ventures", description },
+  openGraph: { title: "Chemical Spot Prices | DS Global Ventures", description, images: ogImages },
 };
 
 const fullDate = (iso: string | null) =>
@@ -88,17 +88,6 @@ export default async function ChemicalPricesPage() {
               </div>
             </>
           )}
-
-          <Reveal className="mt-10 rounded-2xl border border-line bg-mist p-5 text-sm leading-relaxed text-body">
-            <p>
-              <strong className="text-ink">About these prices.</strong> Indicative China spot prices in RMB as published by{" "}
-              <a href="https://www.sunsirs.com/CommodityPrice.html" target="_blank" rel="noopener noreferrer" className="font-semibold text-brand-700 underline underline-offset-2">
-                SunSirs
-              </a>{" "}
-              (source: SunSirs), shown for market reference only. They are not DS Global Ventures’ selling prices or an offer
-              to supply — contact us for a quotation based on your grade, quantity and delivery location.
-            </p>
-          </Reveal>
         </div>
       </section>
 

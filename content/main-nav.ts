@@ -18,22 +18,15 @@ export const businessNav: BusinessNavItem[] = [
   { label: "DS Construction", href: "/ds-construction", meta: "Premium & government construction" },
 ];
 
-export type InsightNavItem = NavItem & { meta: string; icon: "prices" | "blog" };
-
-/** The "Insights" menu — market data and articles */
-export const insightsNav: InsightNavItem[] = [
-  { label: "Chemical Prices", href: "/chemical-prices", meta: "Daily China spot prices, with the change", icon: "prices" },
-  { label: "Blog", href: "/blog", meta: "Guides on sourcing, documents and packaging", icon: "blog" },
-];
-
-export const mainNav: (NavItem & { children?: "products" | "insights" | "businesses" })[] = [
+export const mainNav: (NavItem & { children?: "products" | "businesses" })[] = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Products", href: "/products", children: "products" },
   { label: "Industries", href: "/industries" },
   { label: "Sourcing & Supply", href: "/sourcing-supply" },
   { label: "Quality", href: "/quality" },
-  { label: "Insights", href: "/chemical-prices", children: "insights" },
+  { label: "Chemical Prices", href: "/chemical-prices" },
+  { label: "Blog", href: "/blog" },
   { label: "Our Other Businesses", href: "/ds-construction", children: "businesses" },
   { label: "Contact", href: "/contact" },
 ];

@@ -1,3 +1,4 @@
+import { ogImages } from "@/lib/seo";
 import type { CSSProperties } from "react";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -27,12 +28,15 @@ import { jsonLd } from "@/lib/utils";
 
 const title = "DS Construction | Premium & Government Construction";
 
+const metaDescription =
+  "DS Construction delivers design-build, civil and finishing works for premium private clients and government departments, built to the approved specification.";
+
 export const metadata: Metadata = {
   title: { absolute: title },
-  description: construction.description,
+  description: metaDescription,
   alternates: { canonical: "/ds-construction" },
-  openGraph: { title, description: construction.description, url: absoluteUrl("/ds-construction"), siteName: construction.name },
-  twitter: { title, description: construction.description },
+  openGraph: { title, description: metaDescription, url: absoluteUrl("/ds-construction"), siteName: construction.name, images: ogImages },
+  twitter: { card: "summary_large_image", title, description: metaDescription },
 };
 
 const d = (delay: number) => ({ "--d": `${delay}s` }) as CSSProperties;

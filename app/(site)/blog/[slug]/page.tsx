@@ -37,6 +37,7 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
       description: post.description,
       publishedTime: post.published,
       url: absoluteUrl(`/blog/${post.slug}`),
+      images: [{ url: absoluteUrl(images[post.image].src.src), width: images[post.image].src.width, height: images[post.image].src.height, alt: images[post.image].alt }],
     },
   };
 }

@@ -9,7 +9,7 @@ export const site = {
   tagline: "Reliable Chemical Sourcing. Trusted Global Trade.",
   descriptor: "Industrial Chemicals | Chemical Raw Materials | Sourcing | Trading | Supply",
   description:
-    "DS Global Ventures supplies and sources industrial chemicals and raw materials — Phenol, Paraformaldehyde, Formaldehyde, Methanol and Acetone — for resin, plywood, paint, pharma and chemical manufacturers.",
+    "Industrial chemical supplier and sourcing partner — Phenol, Paraformaldehyde, Formaldehyde, Methanol, Acetone and more for resin, plywood, paint and pharma.",
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.dsglobalventures.com").replace(/\/$/, ""),
   locale: "en_IN",
 

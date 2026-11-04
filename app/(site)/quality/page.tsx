@@ -10,9 +10,9 @@ import { documents, specificationParams } from "@/content/company";
 import { images } from "@/lib/images";
 
 export const metadata: Metadata = {
-  title: "Quality & Documentation | COA, SDS & Specifications",
+  title: "Quality & Documentation (COA, SDS, Specs)",
   description:
-    "COA, SDS/MSDS, product specifications and batch information coordinated as applicable — plus guidance on responsible chemical handling.",
+    "COA, SDS/MSDS, product specifications and batch information coordinated as applicable — plus guidance on responsible chemical handling and storage.",
   alternates: { canonical: "/quality" },
 };
 

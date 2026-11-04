@@ -6,7 +6,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { Logo } from "@/components/layout/logo";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { businessNav, insightsNav, mainNav, type ProductMenuCategory } from "@/content/main-nav";
+import { businessNav, mainNav, type ProductMenuCategory } from "@/content/main-nav";
 import { site, telLink, whatsappLink } from "@/lib/site";
 import { cx as cn } from "@/lib/cx";
 
@@ -69,7 +69,7 @@ export function MobileMenu({
   pathname: string;
   productMenu: ProductMenuCategory[];
 }) {
-  // which expandable section (Products, Insights, Our Other Businesses) is open
+  // which expandable section (Products, Our Other Businesses) is open
   const [openSection, setOpenSection] = useState<string | null>(null);
   useEffect(() => {
     if (!open) return;
@@ -157,7 +157,7 @@ export function MobileMenu({
                                   <ProductLinks categories={productMenu} onNavigate={onClose} />
                                 ) : (
                                   <ul>
-                                    {(item.children === "insights" ? insightsNav : businessNav).map((p) => (
+                                    {businessNav.map((p) => (
                                       <li key={p.href}>
                                         <MenuLink href={p.href} label={p.label} meta={p.meta} />
                                       </li>

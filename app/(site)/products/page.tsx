@@ -14,9 +14,9 @@ import { images } from "@/lib/images";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Products | Industrial Chemicals & Raw Materials",
+  title: "Industrial Chemicals & Raw Materials",
   description:
-    "Alcohols, glycols, polymers, monomers and other industrial chemicals — Methanol, MEG, PVC, Styrene, VAM, Phenol, Melamine and more — with COA and MSDS documents, sourced and supplied to your specification.",
+    "Methanol, MEG, Phenol, Styrene, VAM, Melamine and more industrial chemicals — sourced to your specification, with COA and MSDS documents.",
   alternates: { canonical: "/products" },
 };
 

@@ -34,9 +34,9 @@ export const posts: BlogPost[] = [
   {
     slug: "resin-raw-materials-phenol-formaldehyde-paraformaldehyde",
     title: "Phenol, Formaldehyde and Paraformaldehyde: A Buyer’s Guide to Resin Raw Materials",
-    seoTitle: "Resin Raw Materials: Phenol, Formaldehyde & Paraformaldehyde",
+    seoTitle: "Resin Raw Materials Buyer’s Guide",
     description:
-      "How phenol, formaldehyde, paraformaldehyde and methanol fit together in plywood, laminate and moulding resins — and what to specify before you buy them.",
+      "How phenol, formaldehyde, paraformaldehyde and methanol fit together in plywood, laminate and moulding resins — and what to specify before buying.",
     excerpt:
       "Plywood, laminates and moulding compounds all depend on formaldehyde-based resins. Here is how phenol, formaldehyde, paraformaldehyde and methanol fit together — and what to check before you order them.",
     category: "Product Knowledge",
@@ -126,9 +126,9 @@ export const posts: BlogPost[] = [
   {
     slug: "how-to-read-a-certificate-of-analysis",
     title: "How to Read a Certificate of Analysis for Industrial Chemicals",
-    seoTitle: "How to Read a Certificate of Analysis (COA) for Chemicals",
+    seoTitle: "How to Read a COA for Industrial Chemicals",
     description:
-      "A field-by-field guide to the certificate of analysis — how it differs from an SDS, which parameters matter for common solvents and resin chemicals, and the warning signs to look for.",
+      "A field-by-field guide to the certificate of analysis: how it differs from an SDS, which parameters matter for common chemicals, and warning signs.",
     excerpt:
       "A COA is the quickest way to check that a delivery matches what you ordered — if you know what to look for. A field-by-field guide, with the parameters that matter for common solvents and resin chemicals.",
     category: "Quality & Documents",
@@ -211,9 +211,9 @@ export const posts: BlogPost[] = [
   {
     slug: "choosing-packaging-for-industrial-chemicals",
     title: "Drums, IBCs, ISO Tanks or Road Tankers? Choosing Packaging for Industrial Chemicals",
-    seoTitle: "Drums, IBCs or ISO Tanks? Choosing Chemical Packaging",
+    seoTitle: "Chemical Packaging: Drums, IBCs, ISO Tanks",
     description:
-      "Compare drums, IBCs, bags, ISO tank containers and road tankers for industrial chemicals — and match the format to your volumes, storage, product and transport rules.",
+      "Compare drums, IBCs, bags, ISO tanks and road tankers for industrial chemicals, and match the format to your volumes, storage and transport rules.",
     excerpt:
       "The right pack size cuts handling, storage and per-kilo cost; the wrong one adds to all three. Compare drums, IBCs, bags, ISO tanks and road tankers, and match them to your volumes and your site.",
     category: "Supply & Logistics",

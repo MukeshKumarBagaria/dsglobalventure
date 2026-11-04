@@ -3,7 +3,8 @@ import { posts } from "@/content/blog";
 import { products } from "@/content/products";
 import { absoluteUrl } from "@/lib/site";
 
-const lastModified = new Date("2026-10-15");
+// bump when page content changes materially; Google uses it to decide what to re-crawl
+const lastModified = new Date("2026-11-05");
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: { path: string; priority: number; changeFrequency: "daily" | "monthly" | "yearly" }[] = [
@@ -18,6 +19,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/quality", priority: 0.7, changeFrequency: "yearly" },
     { path: "/contact", priority: 0.8, changeFrequency: "yearly" },
     { path: "/blog", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/ds-construction", priority: 0.7, changeFrequency: "monthly" },
     { path: "/chemical-prices", priority: 0.8, changeFrequency: "daily" },
     { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },
     { path: "/terms-and-conditions", priority: 0.2, changeFrequency: "yearly" },

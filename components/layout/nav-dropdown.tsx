@@ -55,7 +55,7 @@ export function NavDropdown({
         aria-expanded={open}
         aria-haspopup="true"
         className={cn(
-          "flex items-center gap-1.5 rounded-full px-2 py-2 text-[0.84rem] font-medium whitespace-nowrap transition-colors 2xl:px-2.5 2xl:text-[0.875rem]",
+          "flex items-center gap-1.5 rounded-full px-1.5 py-2 text-[0.8rem] font-medium whitespace-nowrap transition-colors 2xl:px-2.5 2xl:text-[0.875rem]",
           active ? "text-brand-700" : "text-ink/75 hover:text-ink",
         )}
       >

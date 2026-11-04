@@ -63,7 +63,13 @@ export const metadata: Metadata = {
     title: "DS Global Ventures | Industrial Chemical Trading & Sourcing",
     description: site.description,
   },
-  robots: { index: true, follow: true },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1, "max-video-preview": -1 },
+  },
+  // Search Console "HTML tag" verification — set NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION to the content value Google gives you
+  verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION },
   formatDetection: { telephone: false },
 };
 
@@ -86,7 +92,12 @@ const organizationSchema = {
       email: site.contact.email,
       telephone: site.contact.phoneE164,
       logo: absoluteUrl("/icons/icon-512.png"),
-      address: { "@type": "PostalAddress", addressCountry: "IN", streetAddress: site.contact.address },
+      // the street address stays out of the structured data until the real one replaces the placeholder in lib/site.ts
+      address: {
+        "@type": "PostalAddress",
+        addressCountry: "IN",
+        ...(/to be updated/i.test(site.contact.address) ? {} : { streetAddress: site.contact.address }),
+      },
       contactPoint: {
         "@type": "ContactPoint",
         contactType: "sales",
@@ -133,7 +144,7 @@ document.addEventListener('pointermove',function(e){var t=e.target;var c=t&&t.cl
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${jakarta.variable} ${dmSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en-IN" suppressHydrationWarning className={`${jakarta.variable} ${dmSans.variable} ${geistMono.variable} antialiased`}>
       <body className="min-h-dvh bg-white">
         <script dangerouslySetInnerHTML={{ __html: bootScript }} />
         <script type="application/ld+json" dangerouslySetInnerHTML={jsonLd(organizationSchema)} />

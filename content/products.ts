@@ -63,7 +63,7 @@ export const products: Product[] = [
     safety:
       "Phenol is toxic and corrosive. It can be absorbed through the skin and cause severe burns. Handle only with appropriate PPE in well-ventilated areas, and review the SDS before handling, storage or transport.",
     image: "stainlessTanks",
-    seoTitle: "Phenol Supplier (CAS 108-95-2) — Industrial Phenol Sourcing",
+    seoTitle: "Phenol Supplier in India (CAS 108-95-2)",
     seoDescription:
       "Source and buy Phenol (CAS 108-95-2) for phenolic resins, adhesives, laminates and bisphenol-A. Grade, packaging, COA & SDS coordinated to your requirement.",
   },
@@ -91,7 +91,7 @@ export const products: Product[] = [
     safety:
       "Paraformaldehyde is a flammable solid that releases formaldehyde gas. It is harmful if swallowed or inhaled and may cause skin sensitisation. Keep away from heat and ignition sources, avoid dust formation and review the SDS before use.",
     image: "sacks",
-    seoTitle: "Paraformaldehyde Supplier (CAS 30525-89-4) — Paraform Sourcing",
+    seoTitle: "Paraformaldehyde Supplier (CAS 30525-89-4)",
     seoDescription:
       "Source Paraformaldehyde (CAS 30525-89-4) for phenolic and amino resins, adhesives and wood-panel industries. Packaging, COA & SDS coordinated as applicable.",
   },
@@ -119,9 +119,9 @@ export const products: Product[] = [
     safety:
       "Formaldehyde is toxic, corrosive and a known sensitiser, and is classified as a carcinogen. Use with adequate ventilation and appropriate PPE, and review the SDS before handling, storage or transport.",
     image: "tankerDepot",
-    seoTitle: "Formaldehyde Supplier (CAS 50-00-0) — Formalin for Resins & Plywood",
+    seoTitle: "Formaldehyde Supplier (CAS 50-00-0)",
     seoDescription:
-      "Source Formaldehyde / Formalin (CAS 50-00-0) for resin manufacturing, adhesives, plywood and laminates. Bulk supply with COA & SDS coordinated as applicable.",
+      "Source Formaldehyde / Formalin (CAS 50-00-0) for resins, adhesives, plywood and laminates. Bulk supply, COA & SDS coordinated as applicable.",
   },
   {
     slug: "methanol",
@@ -146,7 +146,7 @@ export const products: Product[] = [
     safety:
       "Methanol is highly flammable and toxic if swallowed, inhaled or absorbed through the skin. Store away from ignition sources in approved containers and review the SDS before handling.",
     image: "tankerTrucks",
-    seoTitle: "Methanol Supplier (CAS 67-56-1) — Industrial Methanol Sourcing",
+    seoTitle: "Methanol Supplier in India (CAS 67-56-1)",
     seoDescription:
       "Source Methanol (CAS 67-56-1) as a solvent, feedstock and chemical intermediate. Bulk tankers, ISO tanks or drums — COA & SDS coordinated as applicable.",
   },
@@ -173,7 +173,7 @@ export const products: Product[] = [
     safety:
       "Acetone is highly flammable and its vapour can form explosive mixtures with air. It causes serious eye irritation. Keep away from heat and ignition sources and review the SDS before handling.",
     image: "drums",
-    seoTitle: "Acetone Supplier (CAS 67-64-1) — Industrial Solvent Sourcing",
+    seoTitle: "Acetone Supplier in India (CAS 67-64-1)",
     seoDescription:
       "Source Acetone (CAS 67-64-1) for solvents, paints & coatings and chemical processing. Drums, IBCs or bulk — COA & SDS coordinated as applicable.",
   },

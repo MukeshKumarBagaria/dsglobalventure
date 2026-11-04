@@ -3,7 +3,7 @@ import { LegalPage } from "@/components/sections/legal-page";
 
 export const metadata: Metadata = {
   title: "Terms & Conditions",
-  description: "Terms governing the use of the DS Global Ventures website.",
+  description: "Terms governing the use of the DS Global Ventures website, enquiries, quotations and the product and document information published on it.",
   alternates: { canonical: "/terms-and-conditions" },
 };
 

@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Industries We Serve",
   description:
-    "Chemical raw materials for resins & adhesives, plywood & laminates, paints & coatings, chemical manufacturing, pharmaceuticals, rubber & plastics, construction chemicals and textiles.",
+    "Chemical raw materials for resins, plywood, paints & coatings, pharma, rubber & plastics, construction chemicals and textiles.",
   alternates: { canonical: "/industries" },
 };
 

@@ -14,9 +14,9 @@ import { absoluteUrl } from "@/lib/site";
 import { jsonLd } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Product Catalogue — Specification Sheets (COA) & Safety Data Sheets (MSDS)",
+  title: "Chemical Catalogue — COA & MSDS Sheets",
   description:
-    "Browse DS Global Ventures' product catalogue — specification sheets (COA) and material safety data sheets (MSDS) for Phenol, Methanol, MEG, Styrene, Isopropanol, Acetic Acid, Melamine, VAM, Paraffin Wax and more. View instantly, download, or request a quotation.",
+    "Specification sheets (COA) and safety data sheets (MSDS) for Phenol, Methanol, MEG, Styrene, Isopropanol, Melamine, VAM and more. View, download or request a quote.",
   alternates: { canonical: "/product-catalog" },
 };
 

@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/layout/logo";
 import { Marquee } from "@/components/ui/marquee";
-import { insightsNav, type NavItem } from "@/content/main-nav";
 import { mainNav, legalNav, productNav } from "@/content/navigation";
 import { mailLink, site, telLink } from "@/lib/site";
 
@@ -36,7 +35,7 @@ export function Footer() {
         <nav aria-label="Quick links" className="lg:col-span-2">
           <h2 className="font-mono text-xs font-medium tracking-[0.18em] text-brand-700 uppercase">Quick Links</h2>
           <ul className="mt-5 space-y-3 text-sm">
-            {mainNav.flatMap<NavItem>((l) => (l.children === "insights" ? insightsNav : [l])).map((l) => (
+            {mainNav.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="transition-colors hover:text-brand-700">
                   {l.label}

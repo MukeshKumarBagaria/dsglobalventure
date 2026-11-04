@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Privacy Policy",
-  description: "How DS Global Ventures collects and uses information submitted through this website.",
+  description: "How DS Global Ventures collects, uses and protects the information you submit through enquiry forms and other parts of this website.",
   alternates: { canonical: "/privacy-policy" },
 };
 
