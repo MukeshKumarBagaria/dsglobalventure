@@ -51,7 +51,7 @@ export default function QuoteDialog({
             Share your quantity, delivery location and any grade or packaging requirement — our team will respond with
             availability and commercial terms.
           </p>
-          <EnquiryForm defaultProduct={product.slug} lockProduct defaultMessage={message ?? ""} submitLabel="Request Quotation" options={options} />
+          <EnquiryForm defaultProduct={product.slug} lockProduct defaultMessage={message ?? ""} submitLabel="Request Quotation" source="Catalogue quotation" options={options} />
         </div>
       </div>
     </Modal>

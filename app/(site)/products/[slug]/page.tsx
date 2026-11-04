@@ -304,7 +304,7 @@ async function ProductDetail({ params }: { params: Promise<{ slug: string }> }) 
           </div>
           <Reveal delay={0.1} className="lg:col-span-7">
             <div className="rounded-[2rem] bg-white p-6 shadow-[0_40px_80px_-35px_rgb(16_41_74/0.4)] sm:p-10">
-              <EnquiryForm defaultProduct={product.slug} lockProduct submitLabel="Request a Quote" options={productOptions} />
+              <EnquiryForm defaultProduct={product.slug} lockProduct submitLabel="Request a Quote" source="Product page quote" options={productOptions} />
             </div>
           </Reveal>
         </div>

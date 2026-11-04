@@ -6,7 +6,7 @@ import { useEffect, useState, type CSSProperties } from "react";
 import { Logo } from "@/components/layout/logo";
 import { Button } from "@/components/ui/button";
 import { WhatsAppIcon } from "@/components/ui/whatsapp-icon";
-import { businessNav, mainNav, type ProductMenuCategory } from "@/content/main-nav";
+import { businessNav, insightsNav, mainNav, type ProductMenuCategory } from "@/content/main-nav";
 import { site, telLink, whatsappLink } from "@/lib/site";
 import { cx as cn } from "@/lib/cx";
 
@@ -69,8 +69,8 @@ export function MobileMenu({
   pathname: string;
   productMenu: ProductMenuCategory[];
 }) {
-  const [productsOpen, setProductsOpen] = useState(false);
-  const [businessesOpen, setBusinessesOpen] = useState(false);
+  // which expandable section (Products, Insights, Our Other Businesses) is open
+  const [openSection, setOpenSection] = useState<string | null>(null);
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -129,24 +129,22 @@ export function MobileMenu({
                           </Link>
                           <button
                             type="button"
-                            onClick={() =>
-                              item.children === "products" ? setProductsOpen((v) => !v) : setBusinessesOpen((v) => !v)
-                            }
-                            aria-expanded={item.children === "products" ? productsOpen : businessesOpen}
+                            onClick={() => setOpenSection((open) => (open === item.children ? null : item.children!))}
+                            aria-expanded={openSection === item.children}
                             aria-label={`Toggle ${item.label.toLowerCase()}`}
                             className="flex size-10 items-center justify-center rounded-full border border-line bg-white text-ink"
                           >
                             <ChevronDown
                               className={cn(
                                 "size-4 transition-transform",
-                                (item.children === "products" ? productsOpen : businessesOpen) && "rotate-180",
+                                openSection === item.children && "rotate-180",
                               )}
                               aria-hidden
                             />
                           </button>
                         </div>
                         {(() => {
-                          const isOpen = item.children === "products" ? productsOpen : businessesOpen;
+                          const isOpen = openSection === item.children;
                           return (
                             <div
                               className={cn(
@@ -159,7 +157,7 @@ export function MobileMenu({
                                   <ProductLinks categories={productMenu} onNavigate={onClose} />
                                 ) : (
                                   <ul>
-                                    {businessNav.map((p) => (
+                                    {(item.children === "insights" ? insightsNav : businessNav).map((p) => (
                                       <li key={p.href}>
                                         <MenuLink href={p.href} label={p.label} meta={p.meta} />
                                       </li>

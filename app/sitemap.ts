@@ -6,7 +6,7 @@ import { absoluteUrl } from "@/lib/site";
 const lastModified = new Date("2026-10-15");
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const pages: { path: string; priority: number; changeFrequency: "monthly" | "yearly" }[] = [
+  const pages: { path: string; priority: number; changeFrequency: "daily" | "monthly" | "yearly" }[] = [
     { path: "/", priority: 1, changeFrequency: "monthly" },
     { path: "/products", priority: 0.9, changeFrequency: "monthly" },
     ...products.map((p) => ({ path: `/products/${p.slug}`, priority: 0.9, changeFrequency: "monthly" as const })),
@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/quality", priority: 0.7, changeFrequency: "yearly" },
     { path: "/contact", priority: 0.8, changeFrequency: "yearly" },
     { path: "/blog", priority: 0.7, changeFrequency: "monthly" },
+    { path: "/chemical-prices", priority: 0.8, changeFrequency: "daily" },
     { path: "/privacy-policy", priority: 0.2, changeFrequency: "yearly" },
     { path: "/terms-and-conditions", priority: 0.2, changeFrequency: "yearly" },
     { path: "/disclaimer", priority: 0.2, changeFrequency: "yearly" },

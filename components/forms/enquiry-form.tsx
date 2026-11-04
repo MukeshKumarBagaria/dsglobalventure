@@ -61,6 +61,7 @@ export function EnquiryForm({
   readQuery = false,
   defaultMessage = "",
   submitLabel = "Submit Enquiry",
+  source = "Website enquiry form",
   className,
 }: {
   defaultProduct?: string;
@@ -69,6 +70,8 @@ export function EnquiryForm({
   readQuery?: boolean;
   defaultMessage?: string;
   submitLabel?: string;
+  /** which form this is ("Contact page", "Catalogue quotation", …) — shown in the enquiry email */
+  source?: string;
   className?: string;
   /** product list for the select (passed from the server to keep product data out of the bundle) */
   options: ProductOption[];
@@ -109,6 +112,9 @@ export function EnquiryForm({
     const form = e.currentTarget;
     const formData = new FormData(form);
     if (lockProduct) formData.set("product", defaultProduct);
+    // tells the team which form and page the enquiry came from
+    formData.set("source", source);
+    formData.set("page", window.location.pathname);
     const values = readEnquiry(formData);
     const found = validateEnquiry(values, productOptions);
     setErrors(found);

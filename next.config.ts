@@ -22,6 +22,10 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     qualities: [70, 75, 85],
   },
+  async redirects() {
+    // the admin area has one tool for now
+    return [{ source: "/admin", destination: "/admin/prices", permanent: false }];
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

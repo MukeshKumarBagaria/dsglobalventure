@@ -47,7 +47,7 @@ export default function ContactPage() {
               <p className="mt-3 mb-9 leading-relaxed">
                 Share the product, quantity and delivery location. Add grade, purity or packaging details if available.
               </p>
-              <EnquiryForm readQuery options={productOptions} />
+              <EnquiryForm readQuery source="Contact page" options={productOptions} />
             </div>
           </Reveal>
 
