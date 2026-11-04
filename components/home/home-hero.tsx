@@ -41,7 +41,7 @@ export function HomeHero() {
       {/* fixed offsets, not % of the hero height — a %-anchored glow moves (CLS) whenever the hero's height settles */}
       <div aria-hidden className="absolute top-40 left-[28%] -z-20 size-[620px] rounded-full bg-[radial-gradient(closest-side,rgb(91_155_245/0.32),transparent)]" />
 
-      <div className="container-wide grid flex-1 items-center gap-12 pt-32 pb-10 lg:grid-cols-12 lg:gap-8 lg:pt-40 lg:pb-10">
+      <div className="container-wide grid flex-1 items-center gap-12 pt-40 pb-10 lg:grid-cols-12 lg:gap-8 lg:pb-10">
         <div className="lg:col-span-7">
           <div className="anim-rise flex flex-wrap items-center gap-x-4 gap-y-2" style={d(0.05)}>
             <span className="inline-flex items-center gap-3 font-mono text-[0.72rem] font-semibold tracking-[0.2em] text-white uppercase">

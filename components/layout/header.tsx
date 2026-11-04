@@ -66,15 +66,15 @@ export function Header({ productMenu, ticker }: { productMenu: ProductMenuCatego
           hidden && "-translate-y-full",
         )}
       >
-        {/* Top utility bar (desktop) */}
+        {/* Top utility bar: market prices at every width, contact links from lg up */}
         <div
           className={cn(
-            "hidden overflow-hidden border-b border-line bg-mist/90 backdrop-blur-md transition-[max-height,opacity] duration-500 ease-(--ease-out-expo) lg:block",
+            "overflow-hidden border-b border-line bg-mist/90 backdrop-blur-md transition-[max-height,opacity] duration-500 ease-(--ease-out-expo)",
             scrolled ? "max-h-0 opacity-0" : "max-h-10 opacity-100",
           )}
         >
-          <div className="container-wide flex h-9 items-center justify-between text-[0.78rem] whitespace-nowrap text-body">
-            <div className="flex items-center gap-6">
+          <div className="container-wide flex items-center justify-between gap-6 text-[0.78rem] whitespace-nowrap text-body lg:h-9">
+            <div className="hidden shrink-0 items-center gap-6 lg:flex">
               <span className="flex items-center gap-2">
                 <Clock className="size-3.5 text-brand-600" aria-hidden />
                 {site.contact.hoursShort}
@@ -83,19 +83,19 @@ export function Header({ productMenu, ticker }: { productMenu: ProductMenuCatego
                 <Phone className="size-3.5 text-brand-600" aria-hidden />
                 {site.contact.phoneDisplay}
               </a>
-              {/* below xl the crude ticker needs the room */}
+              {/* below xl the market ticker needs the room */}
               <a href={mailLink()} className="hidden items-center gap-2 transition-colors hover:text-brand-700 xl:flex">
                 <Mail className="size-3.5 text-brand-600" aria-hidden />
                 {site.contact.email}
               </a>
             </div>
-            <div className="flex items-center gap-5">
+            <div className="flex min-w-0 flex-1 items-center justify-end gap-5">
               {ticker}
               <a
                 href={whatsappLink()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 transition-colors hover:text-brand-700"
+                className="hidden shrink-0 items-center gap-2 transition-colors hover:text-brand-700 lg:flex"
               >
                 <WhatsAppIcon className="size-3.5 text-whatsapp" />
                 WhatsApp

@@ -2,10 +2,10 @@ import { Suspense, type ReactNode } from "react";
 import pdfjsPkg from "pdfjs-dist/package.json";
 import { CatalogController } from "@/components/catalog/catalog-controller";
 import type { ViewerDoc, ViewerProduct } from "@/components/catalog/types";
-import { CrudeTicker } from "@/components/layout/crude-ticker";
 import { FloatingActions } from "@/components/layout/floating-actions";
 import { Footer } from "@/components/layout/footer";
 import { Header } from "@/components/layout/header";
+import { MarketTicker } from "@/components/layout/market-ticker";
 import { catalog, catalogDocuments, docLabels, documentUrl, previewUrl } from "@/content/catalog";
 import { productMenu } from "@/content/navigation";
 import { productOptions } from "@/content/products";
@@ -41,8 +41,9 @@ export function SiteChrome({ children }: { children: ReactNode }) {
       <Header
         productMenu={productMenu}
         ticker={
-          <Suspense fallback={null}>
-            <CrudeTicker />
+          // the fallback holds the ticker's phone height until it streams in, so the main bar below doesn't jump
+          <Suspense fallback={<div className="h-8 lg:hidden" />}>
+            <MarketTicker />
           </Suspense>
         }
       />
